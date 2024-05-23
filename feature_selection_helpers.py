@@ -36,7 +36,7 @@ def make_hists(col, df, renamed=False):
 
 
 
-def hist_overlap(col, df):
+def hist_overlap(col, df, renamed=False):
     '''
     Find the overlap between (1) the normalized histogram made from data in column col with df['K7Q02R_R'] = 1, 2, or 3, and 
     (2) the normalized historgram made from the data in column col with df['K7Q02R_R'] = 4 or 5.
@@ -54,7 +54,7 @@ def hist_overlap(col, df):
 
     overlap = 0
 
-    h1, h2 = make_hists(col, df)
+    h1, h2 = make_hists(col, df, renamed)
 
     assert len(h1)==len(h2), 'Something went wrong, histrograms should be of the same length'
 
