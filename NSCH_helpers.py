@@ -1,4 +1,6 @@
-
+import numpy as np
+from sklearn.impute import SimpleImputer
+import pandas as pd
 
 
 def clean_columns(df, remove_sparse=False, remove_unexpected=False):
@@ -99,8 +101,7 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
 
  
-import numpy as np
-from sklearn.impute import SimpleImputer
+
 
 def impute_NSCH(df, features, imputer = 'mode'):
     
