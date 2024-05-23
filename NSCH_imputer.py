@@ -34,13 +34,13 @@ def cond_nan_NSCH(df, features, replace_with = 0):
     if 'K4Q20R' and 'S4Q01' in features: df.loc[df['S4QO1'] == 2, 'K4Q20R'] = replace_with
     if 'K5Q31_R'and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K5Q31_R'] = replace_with
     if 'K5Q32'and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K5Q32'] = replace_with
-    
+
     if 'K5Q32'and 'K5Q31_R' in features: df.loc[df['K5Q31_R'] == 2, 'K5Q32'] = replace_with
     if 'K5Q32'and 'K5Q31_R' in features: df.loc[df['K5Q31_R'] == 3, 'K5Q32'] = replace_with 
 
 
  
-
+import numpy as np
 from sklearn.impute import SimpleImputer
 
 def impute_NSCH(df, features, imputer = 'mode'):
