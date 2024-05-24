@@ -108,6 +108,9 @@ def impute_NSCH(df, features, imputer = 'mode'):
     Arguments:
     df --data frame of categorical features
     imputer -- str -- select imputation method
+
+    Returns:
+    df with imputed columns
     '''
     nan_cols = [col for col in df.columns if df[col].isnull().sum() != 0]
 
@@ -119,3 +122,27 @@ def impute_NSCH(df, features, imputer = 'mode'):
             df[col] = imp_col
 
 
+
+def clean_NSCH(df, features, response = 'K7Q02R_R',
+               dropna_response = True,
+               drop_age = 5,
+               remove_sparse = False, 
+               remove_unexpected = False,
+               replace_with = 0, 
+               state = 'both'):
+    
+    df = df[features]
+
+    # Drops nan rows from the response variable
+    if dropna_response: df = df[df[response].notna()]
+
+    # Drops ages < drop_age.  I'm commenting this out, since it's not needed (taken care when we dropped nans from K7Q02R_R, missed days)
+    #less_than_drop_age = df.loc(df[SC_AGE_YEARS] < drop_age)
+    #df = df.drop(less_than_drop_age.index)
+
+    # Replacing conditional nan values with replace_with
+    df = cond_nan_NSCH(df, features, replace_with = replace_with)
+    # Column renamer
+    df = clean_columns(df, remove_sparse=remove_sparse, remove_unexpected=remove_unexpected)
+    # Adds state name and state abbreviation column
+    df = FIPS_to_State(df, state = state)
