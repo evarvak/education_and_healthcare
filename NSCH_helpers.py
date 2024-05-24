@@ -102,7 +102,13 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
 
 def impute_NSCH(df, features, imputer = 'mode'):
-    
+    '''
+    This function imputes nan entries.
+
+    Arguments:
+    df --data frame of categorical features
+    imputer -- str -- select imputation method
+    '''
     nan_cols = [col for col in df.columns if df[col].isnull().sum() != 0]
 
     # This imputes nan entries by mode, column by column
