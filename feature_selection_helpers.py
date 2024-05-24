@@ -18,10 +18,9 @@ def make_hists(col, df, renamed=False):
     '''
 
     #set the column containing days-missed data's name
-    if renamed:
+    ref_col = 'K7Q02R_R'
+    if 'days_missed' in df.columns:
         ref_col = 'days_missed'
-    else:
-        ref_col = 'K7Q02R_R'
     
     n_bins = list(set(df[col].dropna())) + [max(list(set(df[col].dropna())))+1]
     n_bins.sort()
@@ -77,13 +76,16 @@ def plot_hists(col,df,renamed=False):
     '''
     
     #set the column containing days-missed data's name
-    if renamed:
+    ref_col = 'K7Q02R_R'
+    if 'days_missed' in df.columns:
         ref_col = 'days_missed'
-    else:
-        ref_col = 'K7Q02R_R'
 
-    n_bins = list(set(df[col].dropna())) + [max(list(set(df[col].dropna())))+1]
+    bin_set = set(df[col].dropna())
+    n_bins = list(bin_set) + [max(bin_set)+1]
     n_bins.sort()
+    if len(n_bins) > 15:
+        n_bins = list(np.arange(min(bin_set), max(bin_set), (max(bin_set)-min(bin_set))/15))
+
 
     x1 = df[col].dropna().loc[df[ref_col]<4]
     hist, bins = np.histogram(x1, bins = n_bins)
@@ -93,7 +95,7 @@ def plot_hists(col,df,renamed=False):
 
     x2 = df[col].dropna().loc[df[ref_col]>=4]
     hist, bins = np.histogram(x2, bins = n_bins)
-    plt.bar(bins[:-1]+(bins[1]-bins[0])/6, hist.astype(np.float32) / hist.sum(), width=(bins[1]-bins[0])/3, label='missed 6+ days')
+    plt.bar(bins[:-1]+(bins[1]-bins[0])/6, hist.astype(np.float32) / hist.sum(), width=(bins[1]-bins[0])/3, label='missed 7+ days')
     plt.xlabel(col)
     plt.legend() 
     #plt.title('current insurance usually does not child\'s needs')
@@ -101,3 +103,34 @@ def plot_hists(col,df,renamed=False):
 
     return None
 
+
+def make_overlap_series(df):
+    '''
+    Return a sorted series of histogram overlap metrics indexed by the feature name
+    Arguments:
+        df: dataframe containing NSCH data
+    Returns:
+        pandas Series of histogram overlap metrics indexed by the feature name
+    '''
+    overlaps_list = []
+    for col in df.select_dtypes(include=['number']):
+        #print(col)
+        overlaps_list.append(hist_overlap(col,df))
+
+    return pd.Series(overlaps_list, index=list(df.select_dtypes(include=['number']))).sort_values()
+
+
+def make_corr_series(df):
+    '''
+    Return a sorted series of correlation coefficients between each numerical feature and days_missed
+    Arguments:
+        df: dataframe containing NSCH data
+    Returns:
+        pandas Series of correlation coefficients indexed by the feature name
+    '''
+    #set the column containing days-missed data's name
+    ref_col = 'K7Q02R_R'
+    if 'days_missed' in df.columns:
+        ref_col = 'days_missed'
+    
+    return df.select_dtypes(include=['number']).corr()[ref_col]
