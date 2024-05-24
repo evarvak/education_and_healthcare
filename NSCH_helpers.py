@@ -100,8 +100,6 @@ def cond_nan_NSCH(df, features, replace_with = 0):
     if 'K5Q32'and 'K5Q31_R' in features: df.loc[df['K5Q31_R'] == 3, 'K5Q32'] = replace_with 
 
 
- 
-
 
 def impute_NSCH(df, features, imputer = 'mode'):
     
