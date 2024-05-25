@@ -133,4 +133,4 @@ def make_corr_series(df):
     if 'days_missed' in df.columns:
         ref_col = 'days_missed'
     
-    return df.select_dtypes(include=['number']).corr()[ref_col]
+    return df.select_dtypes(include=['number']).corr()[ref_col].apply(abs).sort_values()
