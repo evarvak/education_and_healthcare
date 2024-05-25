@@ -89,12 +89,12 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
     if 'K3Q21B' and 'HOWMUCH' in features: df.loc[df['HOWMUCH'] == 1, 'K3Q21B'] = replace_with
 
-    if 'K4Q26'and 'K4Q24_R' in features: df.loc[df['K4Q24_R'] == 3, 'K4Q26'] = replace_with
+    if 'K4Q26' and 'K4Q24_R' in features: df.loc[df['K4Q24_R'] == 3, 'K4Q26'] = replace_with
     if 'K4Q02_R' and 'K4Q01' in features: df.loc[df['K4Q01'] == 2, 'K4Q02_R'] = replace_with
 
-    if 'K4Q20R' and 'S4Q01' in features: df.loc[df['S4QO1'] == 2, 'K4Q20R'] = replace_with
+    if 'K4Q20R' and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K4Q20R'] = replace_with
     if 'K5Q31_R'and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K5Q31_R'] = replace_with
-    if 'K5Q32'and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K5Q32'] = replace_with
+    if 'K5Q32' and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K5Q32'] = replace_with
 
     if 'K5Q32'and 'K5Q31_R' in features: df.loc[df['K5Q31_R'] == 2, 'K5Q32'] = replace_with
     if 'K5Q32'and 'K5Q31_R' in features: df.loc[df['K5Q31_R'] == 3, 'K5Q32'] = replace_with 
@@ -125,21 +125,32 @@ def impute_NSCH(df, features, imputer = 'mode'):
 
 def clean_NSCH(df, features, response = 'K7Q02R_R',
                dropna_response = True,
-               drop_age = 5,
+               drop_notenrolled = True, 
                remove_sparse = False, 
                remove_unexpected = False,
-               replace_with = 0, 
+               replace_with = 0,               
                state = 'both'):
-    
+
+    '''
+    This function combines other cleaning functions to clean NSCH data.
+
+    Arguments:
+    df -- NSCH dataframe
+    features -- list of str -- list of features to keep
+    response -- str -- response feature
+    dropna_response -- bool -- drops nan entries from the response feature
+    drop_notenrolled -- bool -- drops children not enrolled in school
+    remove_sprase/ remove_unexpected -- see claen_columns function
+    replace_with -- any -- see cond_nan_NSCH function
+    state -- str -- include state name ('full'), abbreviation ('abbr') or both ('both').
+    '''
+
     df = df[features]
 
     # Drops nan rows from the response variable
     if dropna_response: df = df[df[response].notna()]
-
-    # Drops ages < drop_age.  I'm commenting this out, since it's not needed (taken care when we dropped nans from K7Q02R_R, missed days)
-    #less_than_drop_age = df.loc(df[SC_AGE_YEARS] < drop_age)
-    #df = df.drop(less_than_drop_age.index)
-
+    # Drops children not enrolled in school
+    if drop_notenrolled: df = df[df['K7Q02R_R'] != 6]
     # Replacing conditional nan values with replace_with
     df = cond_nan_NSCH(df, features, replace_with = replace_with)
     # Column renamer
