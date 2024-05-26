@@ -79,29 +79,31 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
     for feat in ['AVAILABLE', 'APPOINTMENT', 'ISSUECOST', 
                 'NOTELIG', 'NOTOPEN', 'TRANSPORTCC']:
-        if feat in features: df.loc[df['K4Q27'] == 2, feat] = replace_with
+        if feat in features.values: df.loc[df['K4Q27'] == 2, feat] = replace_with
 
     for feat in ['K12Q12', 'K3Q20', 'K3Q22', 'K11Q03R']:
-        if feat in features: df.loc[df['CURRCOV'] == 2, feat] = replace_with
+        if feat in features.values: df.loc[df['CURRCOV'] == 2, feat] = replace_with
 
-    if 'ISSUECOST' and ' K4Q27' in features: df.loc[df['K4Q27'] == 2, 'ISSUECOST'] = replace_with
-
-
-    if 'K3Q21B' and 'HOWMUCH' in features: df.loc[df['HOWMUCH'] == 1, 'K3Q21B'] = replace_with
-
-    if 'K4Q26' and 'K4Q24_R' in features: df.loc[df['K4Q24_R'] == 3, 'K4Q26'] = replace_with
-    if 'K4Q02_R' and 'K4Q01' in features: df.loc[df['K4Q01'] == 2, 'K4Q02_R'] = replace_with
-
-    if 'K4Q20R' and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K4Q20R'] = replace_with
-    if 'K5Q31_R'and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K5Q31_R'] = replace_with
-    if 'K5Q32' and 'S4Q01' in features: df.loc[df['S4Q01'] == 2, 'K5Q32'] = replace_with
-
-    if 'K5Q32'and 'K5Q31_R' in features: df.loc[df['K5Q31_R'] == 2, 'K5Q32'] = replace_with
-    if 'K5Q32'and 'K5Q31_R' in features: df.loc[df['K5Q31_R'] == 3, 'K5Q32'] = replace_with 
+    if 'ISSUECOST' and ' K4Q27' in features.values: df.loc[df['K4Q27'] == 2, 'ISSUECOST'] = replace_with
 
 
+    if 'K3Q21B' and 'HOWMUCH' in features.values: df.loc[df['HOWMUCH'] == 1, 'K3Q21B'] = replace_with
 
-def impute_NSCH(df, features, imputer = 'mode'):
+    if 'K4Q26' and 'K4Q24_R' in features.values: df.loc[df['K4Q24_R'] == 3, 'K4Q26'] = replace_with
+    if 'K4Q02_R' and 'K4Q01' in features.values: df.loc[df['K4Q01'] == 2, 'K4Q02_R'] = replace_with
+
+    if 'K4Q20R' and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K4Q20R'] = replace_with
+    if 'K5Q31_R'and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K5Q31_R'] = replace_with
+    if 'K5Q32' and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K5Q32'] = replace_with
+
+    if 'K5Q32'and 'K5Q31_R' in features.values: df.loc[df['K5Q31_R'] == 2, 'K5Q32'] = replace_with
+    if 'K5Q32'and 'K5Q31_R' in features.values: df.loc[df['K5Q31_R'] == 3, 'K5Q32'] = replace_with 
+
+    return df
+
+
+
+def impute_NSCH(df, imputer = 'mode'):
     '''
     This function imputes nan entries.
 
@@ -123,7 +125,7 @@ def impute_NSCH(df, features, imputer = 'mode'):
 
 
 
-def clean_NSCH(df, features, response = 'K7Q02R_R',
+def clean_NSCH(df, response = 'K7Q02R_R',
                dropna_response = True,
                drop_notenrolled = True, 
                remove_sparse = False, 
@@ -145,6 +147,9 @@ def clean_NSCH(df, features, response = 'K7Q02R_R',
     state -- str -- include state name ('full'), abbreviation ('abbr') or both ('both').
     '''
 
+    # Getting features from NSCH_dictionary.csv
+    nsch_doc = pd.read_csv('data/NSCH_dictionary.csv') 
+    features = nsch_doc['col_name_2019']
     df = df[features]
 
     # Drops nan rows from the response variable
@@ -157,3 +162,6 @@ def clean_NSCH(df, features, response = 'K7Q02R_R',
     df = clean_columns(df, remove_sparse=remove_sparse, remove_unexpected=remove_unexpected)
     # Adds state name and state abbreviation column
     df = FIPS_to_State(df, state = state)
+
+    return df
+
