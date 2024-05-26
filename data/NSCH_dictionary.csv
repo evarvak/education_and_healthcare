@@ -52,3 +52,9 @@ SC_K2Q10,has_perscription,Child currently uses medicine perscribed by a doctor,"
 SC_NHPI,is_hawaiian,Child is native Hawaiian or other Pacific Islanders,"`1 = Yes, 2 = No",0,0
 SC_RACE_R,race,Race of child,"1 = White alone, 2 = Black or African American alone, 3 = American Indian or Alaska Native alone, 4 = Asian alone, 5 = Native Hawaiian and Other Pacific Islander alone, 7 = Two or More Races",0,0
 SC_SEX,sex,Sex of child,"1 = Male, 2 = Female",0,0
+NOTELIG, not_eligible, This child was not eligible for the services, "1 = Yes, 2 = No, Skip if K4Q27 = 2"
+NOTOPEN, not_open, The clinic wasn't open when this child needed care, "1 = Yes, 2 = No, Skip if K4Q27 = 2"
+TRANSPORTCC, transportation, There were problems with getting transportation or child care, "1 =Yes, 2 = No, Skip if K4Q27 = 2"
+S4Q01, doctor_visit, In the past 12 months did this child see a doctor for medical care?, "1 = Yes, 2 = No" 
+K12Q12, gov_health_plan, Is this child currently govered by any government assistance plan?, "1 = Yes, 2 = No, Skip if CURRCOV = 2"
+K5Q32, doctor_school_comm, How satisfied were you with the health care provider's communication with school?, "1 = Very Satified, 2 = Somewhat satisfied, 3 = Somewhat dissatisfied, 4 = Very dissatisfied"
