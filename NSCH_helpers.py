@@ -1,5 +1,7 @@
 import numpy as np
 from sklearn.impute import SimpleImputer
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 
 
@@ -103,7 +105,7 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
 
 
-def impute_NSCH(df, imputer = 'mode'):
+def impute_NSCH(df, response = 'K7Q02R_R', imputer = 'mode'):
     '''
     This function imputes nan entries.
 
@@ -123,6 +125,28 @@ def impute_NSCH(df, imputer = 'mode'):
             imp_col = imp_mode.fit_transform(df[col].values.reshape(-1,1))
             df[col] = imp_col
 
+
+    
+    if imputer == 'rf':
+        # Manually dropping the STATE and ABBR columns since they are not numerical
+        # Note: Should probably just modify clean_NSCH and move FIPS_to_State after imputation.
+        df = df.drop(['STATE','ABBR'], axis = 1)
+        for col in nan_cols:
+            df_null = df.loc[df[col].isnull()]
+            df_notnull = df.loc[df[col].notnull()]
+            df_train_X = df_notnull.drop(col, axis = 1)
+            df_train_y = df_notnull[col]
+
+            rf = RandomForestClassifier(n_estimators = 100, random_state=415)
+            rf.fit(df_train_X, df_train_y)
+            X_pred = df_null.drop(col, axis = 1)
+            y_pred = rf.predict(X_pred)
+
+            df.loc[df[col].isnull(), col] = y_pred
+
+
+    return df
+        
 
 
 def clean_NSCH(df, response = 'K7Q02R_R',
