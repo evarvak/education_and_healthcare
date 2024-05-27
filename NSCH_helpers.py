@@ -1,7 +1,6 @@
 import numpy as np
 from sklearn.impute import SimpleImputer
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import LabelEncoder
 import pandas as pd
 
 
@@ -105,13 +104,15 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
 
 
-def impute_NSCH(df, response = 'K7Q02R_R', imputer = 'mode'):
+def impute_NSCH(df, response = 'K7Q02R_R', imputer = 'mode', state = 'both'):
     '''
     This function imputes nan entries.
 
     Arguments:
     df --data frame of categorical features
     imputer -- str -- select imputation method
+        options: mode (replace by mode)
+                 rf (use RandomForestClassifier)
 
     Returns:
     df with imputed columns
@@ -130,7 +131,9 @@ def impute_NSCH(df, response = 'K7Q02R_R', imputer = 'mode'):
     if imputer == 'rf':
         # Manually dropping the STATE and ABBR columns since they are not numerical
         # Note: Should probably just modify clean_NSCH and move FIPS_to_State after imputation.
-        df = df.drop(['STATE','ABBR'], axis = 1)
+        non_num_cols = ['STATE','ABBR']
+        df = df.drop([col for col in non_num_cols if col in df.columns], axis = 1)
+
         for col in nan_cols:
             df_null = df.loc[df[col].isnull()]
             df_notnull = df.loc[df[col].notnull()]
@@ -144,6 +147,9 @@ def impute_NSCH(df, response = 'K7Q02R_R', imputer = 'mode'):
 
             df.loc[df[col].isnull(), col] = y_pred
 
+    # Inserting the state columns and dropping the FIPSST column
+    df = FIPS_to_State(df, state = state)
+    df = df.drop(labels = 'FIPSST', axis = 1)
 
     return df
         
