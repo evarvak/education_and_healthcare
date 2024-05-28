@@ -132,10 +132,12 @@ def impute_NSCH(df, response = 'K7Q02R_R',
             if test:
                 test_imp_col = imp_mode.transform(test_data[col].values.reshape(-1,1))
                 test_data[col] = test_imp_col
-                return test_data
             else:
                 imp_col = imp_mode.transform(df[col].values.reshape(-1,1))
                 df[col] = imp_col
+        
+        if test: return test_data
+        return df
 
 
     # This imputes nan entries via RandomForestClassifier, column by column    
@@ -143,9 +145,8 @@ def impute_NSCH(df, response = 'K7Q02R_R',
         # Manually dropping the STATE and ABBR columns since they are not numerical
         # Note: Should probably just modify clean_NSCH and move FIPS_to_State after imputation.
         non_num_cols = ['STATE','ABBR']
-        df = df.drop([col for col in non_num_cols if col in df.columns], axis = 1)
-        if test: test_data = test_data.drop(non_num_cols, axis = 1)
-        #if test: test_data = test_data.drop([col for col in non_num_cols if col in df.columns], axis = 1)
+        df = df.drop([col for col in non_num_cols if col in df.columns], axis = 1)        
+        if test: test_data = test_data.drop([col for col in non_num_cols if col in test_data.columns], axis = 1)
 
         for col in nan_cols:
             # This is df consisting of all rows where col is null.  This will be used after we fit the
