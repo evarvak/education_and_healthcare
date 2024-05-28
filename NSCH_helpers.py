@@ -107,7 +107,7 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 def impute_NSCH(df, response = 'K7Q02R_R', 
                 imputer = 'mode', 
                 test = False,
-                test_data = [],
+                test_data  = [],
                 state = 'both'):
     '''
     This function imputes nan entries.
@@ -161,24 +161,26 @@ def impute_NSCH(df, response = 'K7Q02R_R',
 
             rf = RandomForestClassifier(n_estimators = 100, random_state=415)
             rf.fit(df_train_X, df_train_y)
+
             if test:
                 X_test_pred = test_null.drop(col, axis = 1)
                 y_test_pred = rf.predict(X_test_pred)
-                y_test_pred = test_data.loc[test_data[col].isnull(), col]
-                test_data = FIPS_to_State(df, state = state)
-                test_data = test_data.drop(labels = 'FIPSST', axis = 1)
-                return test_data
+                test_data.loc[test_data[col].isnull(), col] = y_test_pred
+            else:    
+                X_pred = df_null.drop(col, axis = 1)
+                y_pred = rf.predict(X_pred)
+                df.loc[df[col].isnull(), col] = y_pred
 
-            X_pred = df_null.drop(col, axis = 1)
-            y_pred = rf.predict(X_pred)
+        if test:
+            # Inserting the state columns and dropping the FIPSST column
+            test_data = FIPS_to_State(test_data, state = state)
+            test_data = test_data.drop(labels = 'FIPSST', axis = 1)
+            return test_data 
+        else:
+            df = FIPS_to_State(df, state = state)
+            df = df.drop(labels = 'FIPSST', axis = 1)
+            return df
 
-            df.loc[df[col].isnull(), col] = y_pred
-
-    # Inserting the state columns and dropping the FIPSST column
-    df = FIPS_to_State(df, state = state)
-    df = df.drop(labels = 'FIPSST', axis = 1)
-
-    return df
         
 
 
