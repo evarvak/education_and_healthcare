@@ -104,7 +104,11 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
 
 
-def impute_NSCH(df, response = 'K7Q02R_R', imputer = 'mode', state = 'both'):
+def impute_NSCH(df, response = 'K7Q02R_R', 
+                imputer = 'mode', 
+                test = False,
+                test_data = [],
+                state = 'both'):
     '''
     This function imputes nan entries.
 
@@ -122,26 +126,48 @@ def impute_NSCH(df, response = 'K7Q02R_R', imputer = 'mode', state = 'both'):
     # This imputes nan entries by mode, column by column
     if imputer == 'mode':
         imp_mode = SimpleImputer(missing_values = np.nan, strategy='most_frequent')
+
         for col in nan_cols:
-            imp_col = imp_mode.fit_transform(df[col].values.reshape(-1,1))
-            df[col] = imp_col
+            imp_col = imp_mode.fit(df[col].values.reshape(-1,1))
+            if test:
+                test_imp_col = imp_mode.transform(test_data[col].values.reshape(-1,1))
+                test_data[col] = test_imp_col
+                return test_data
+            else:
+                imp_col = imp_mode.transform(df[col].values.reshape(-1,1))
+                df[col] = imp_col
 
 
-    
+    # This imputes nan entries via RandomForestClassifier, column by column    
     if imputer == 'rf':
         # Manually dropping the STATE and ABBR columns since they are not numerical
         # Note: Should probably just modify clean_NSCH and move FIPS_to_State after imputation.
         non_num_cols = ['STATE','ABBR']
         df = df.drop([col for col in non_num_cols if col in df.columns], axis = 1)
+        if test: test_data = test_data.drop(non_num_cols, axis = 1)
+        #if test: test_data = test_data.drop([col for col in non_num_cols if col in df.columns], axis = 1)
 
         for col in nan_cols:
+            # This is df consisting of all rows where col is null.  This will be used after we fit the
+            # imputer when creating the predictor.
             df_null = df.loc[df[col].isnull()]
+            if test: test_null = test_data.loc[test_data[col].isnull()]
+            # This is df consisting of all rows where col is not null.  This will be used to fit the imputer.
             df_notnull = df.loc[df[col].notnull()]
+
             df_train_X = df_notnull.drop(col, axis = 1)
             df_train_y = df_notnull[col]
 
             rf = RandomForestClassifier(n_estimators = 100, random_state=415)
             rf.fit(df_train_X, df_train_y)
+            if test:
+                X_test_pred = test_null.drop(col, axis = 1)
+                y_test_pred = rf.predict(X_test_pred)
+                y_test_pred = test_data.loc[test_data[col].isnull(), col]
+                test_data = FIPS_to_State(df, state = state)
+                test_data = test_data.drop(labels = 'FIPSST', axis = 1)
+                return test_data
+
             X_pred = df_null.drop(col, axis = 1)
             y_pred = rf.predict(X_pred)
 
