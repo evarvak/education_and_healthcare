@@ -122,9 +122,13 @@ def impute_NSCH(df, response = 'K7Q02R_R',
     imputer -- str -- select imputation method
         options: mode (replace by mode)
                  rf (use RandomForestClassifier)
+    test -- bool -- if True, this will impute test_data
+    test_data -- data frame with the same columns as df, to be imputed.  Note the imputer which imputes test_data will be fit with
+                 df (think of df as a training set)
+    state -- see the FIPS_to_State function
 
     Returns:
-    df with imputed columns
+    df with imputed columns or test_data with imputed columns if test = True.
     '''
     nan_cols = [col for col in df.columns if df[col].isnull().sum() != 0]
 
