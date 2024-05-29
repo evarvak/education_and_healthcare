@@ -2,7 +2,7 @@
 Team: 
 June 1, 2024 
 
-Erdos Institute Data Science Boot Camp project 
+Erdos Institute Data Science Boot Camp project  
  
 ## Project Description
 This project involves the investigation and evaluation of how different factors contributing to children's access to healthcare affects their academic performance. In particular, this project investigates the connection between healthcare access and school absenteeism.
@@ -39,10 +39,30 @@ Assuming our model is capable of returning a probability distribution for each A
 The usual metrics for errors: Mean Squared Error (MSE), Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).  These can be applied to prediction errors in the APFs. 
 Of course this list is not exhaustive and is subject to change as the project develops. 
 
-# Data wrangling
+## Data wrangling
 
 ### Data selection
 
 ### Data cleaning
 
 ### Exploratory data analysis
+
+## Proposed modeling approach 
+
+### Initial model choice
+
+### Model selection 
+
+### Model evaluation 
+
+### Model analysis
+
+## Conclusion
+
+## Possible future directions 
+
+## Appendices
+
+### Data repository
+
+
