@@ -46,3 +46,13 @@ Of course this list is not exhaustive and is subject to change as the project de
 ### Data cleaning
 
 ### Exploratory data analysis
+
+# Proposed modeling approach 
+
+# Initial model choice
+
+# Model selection 
+
+# Model evaluation 
+
+# Model analysis 
