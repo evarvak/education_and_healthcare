@@ -39,7 +39,7 @@ Assuming our model is capable of returning a probability distribution for each A
 The usual metrics for errors: Mean Squared Error (MSE), Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).  These can be applied to prediction errors in the APFs. 
 Of course this list is not exhaustive and is subject to change as the project develops. 
 
-# Data wrangling
+## Data wrangling
 
 ### Data selection
 
@@ -47,12 +47,22 @@ Of course this list is not exhaustive and is subject to change as the project de
 
 ### Exploratory data analysis
 
-# Proposed modeling approach 
+## Proposed modeling approach 
 
-# Initial model choice
+### Initial model choice
 
-# Model selection 
+### Model selection 
 
-# Model evaluation 
+### Model evaluation 
 
-# Model analysis 
+### Model analysis
+
+## Conclusion
+
+## Possible future directions 
+
+## Appendices
+
+### Data repository
+
+
