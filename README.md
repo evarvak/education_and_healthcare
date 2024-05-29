@@ -38,3 +38,11 @@ If we study the binary outcome of APFs being above or below national/local avera
 Assuming our model is capable of returning a probability distribution for each APF given an initial set of AHF we may use the Kullback–Leibler (KL) divergence to compare the predicted probability distribution to the observed distribution from our dataset.
 The usual metrics for errors: Mean Squared Error (MSE), Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).  These can be applied to prediction errors in the APFs. 
 Of course this list is not exhaustive and is subject to change as the project develops. 
+
+# Data wrangling
+
+### Data selection
+
+### Data cleaning
+
+### Exploratory data analysis
