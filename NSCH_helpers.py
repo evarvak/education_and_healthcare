@@ -82,7 +82,7 @@ def cond_nan_NSCH(df, features, replace_with = 0):
                 'NOTELIG', 'NOTOPEN', 'TRANSPORTCC']:
         if feat in features.values: df.loc[df['K4Q27'] == 2, feat] = replace_with
 
-    for feat in ['K12Q12', 'K3Q20', 'K3Q22', 'K11Q03R']:
+    for feat in ['K12Q12', 'K3Q20', 'K3Q22', 'K11Q03R', 'MENBEVCOV']:
         if feat in features.values: df.loc[df['CURRCOV'] == 2, feat] = replace_with
 
     if 'ISSUECOST' and ' K4Q27' in features.values: df.loc[df['K4Q27'] == 2, 'ISSUECOST'] = replace_with
@@ -93,12 +93,17 @@ def cond_nan_NSCH(df, features, replace_with = 0):
     if 'K4Q26' and 'K4Q24_R' in features.values: df.loc[df['K4Q24_R'] == 3, 'K4Q26'] = replace_with
     if 'K4Q02_R' and 'K4Q01' in features.values: df.loc[df['K4Q01'] == 2, 'K4Q02_R'] = replace_with
 
-    if 'K4Q20R' and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K4Q20R'] = replace_with
-    if 'K5Q31_R'and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K5Q31_R'] = replace_with
-    if 'K5Q32' and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K5Q32'] = replace_with
+    for feat in ['K4Q20R', 'K5Q31_R', 'K5Q32', 'K5Q20_R', 'DECISIONS']:
+        if feat in features.values: df.loc[df['S4Q01'] == 2, feat] = replace_with
+    #if 'K4Q20R' and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K4Q20R'] = replace_with
+    #if 'K5Q31_R'and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K5Q31_R'] = replace_with
+    #if 'K5Q32' and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K5Q32'] = replace_with
 
     if 'K5Q32'and 'K5Q31_R' in features.values: df.loc[df['K5Q31_R'] == 2, 'K5Q32'] = replace_with
     if 'K5Q32'and 'K5Q31_R' in features.values: df.loc[df['K5Q31_R'] == 3, 'K5Q32'] = replace_with 
+
+    if 'K5Q21' and 'S4Q01' in features.values: df.loc[df['S4Q01'] == 2, 'K5Q21'] = replace_with
+    if 'K5Q21' and 'K5Q20_R'  in features.values: df.loc[df['K5Q20_R'] == 3, 'K5Q21'] = replace_with
 
     return df
 
