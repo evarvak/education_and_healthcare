@@ -5,7 +5,8 @@ import feature_selection_helpers as fsh
 import NSCH_helpers as nh
 from sklearn.linear_model import LogisticRegression, Lasso
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.metrics import accuracy_score, confusion_matrix, recall_score, precision_score, precision_recall_curve, roc_curve, roc_auc_score, average_precision_score
+from sklearn.metrics import accuracy_score, confusion_matrix, recall_score, precision_score, precision_recall_curve
+from sklearn.metrics import roc_curve, roc_auc_score, average_precision_score, fowlkes_mallows_score, f1_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 
@@ -22,14 +23,16 @@ def clf_metrics(clf, X, y, threshold=0.5):
         dataframe containing various performance metrics for each threshold in threshold
     '''
     probs = clf.predict_proba(X)
-    index = ['Accuracy', 'Precision', 'Recall', 'Average_Precision_Score']
+    index = ['Accuracy', 'Precision', 'Recall', 'Average_Precision_Score', 'F1 score']
 
     if not hasattr(threshold,'__iter__'):
         threshold = [threshold]
     column = ['Threshold = ' + str(round(thresh,3)) for thresh in threshold]
     df = pd.DataFrame(index=index,columns=column)
     for i, thresh in enumerate(threshold):
-        df[column[i]] = [accuracy_score(y, (probs[:,1]>thresh)), precision_score(y, (probs[:,1]>thresh)), recall_score(y, (probs[:,1]>thresh)), average_precision_score(y,probs[:,1])]
+        df[column[i]] = [accuracy_score(y, (probs[:,1]>thresh)), precision_score(y, (probs[:,1]>thresh)),
+                        recall_score(y, (probs[:,1]>thresh)), average_precision_score(y,probs[:,1]),
+                        f1_score(y, (probs[:,1]>thresh))]
     
     return df
 
