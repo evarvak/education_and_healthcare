@@ -109,7 +109,7 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
 
 
-def impute_NSCH(df, 
+def impute_NSCH(df_train, 
                 has_response = True,
                 response = 'days_missed', 
                 imputer = 'mode', 
@@ -136,6 +136,7 @@ def impute_NSCH(df,
     Returns:
     df with imputed columns or test_data with imputed columns if test = True.
     '''
+    df = df_train.copy()
     nan_cols = [col for col in df.columns if df[col].isnull().sum() != 0]
 
     # This imputes nan entries by mode, column by column
