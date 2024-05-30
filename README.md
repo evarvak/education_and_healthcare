@@ -53,7 +53,7 @@ The goal of this section is to automatically identify which features in our data
 
 ![](figures/correlation1.png)<!-- -->
 
- The graph below shows two large clusters in our features:
+In addition to clusters of two, the graph above shows two large clusters in our features:
 
 | Cluster 1 | Cluster 2                                                                                   |
 |------|-----------------------------------------------------------------------------------------|
@@ -65,6 +65,13 @@ The goal of this section is to automatically identify which features in our data
 | how_insured  | not_eligible                                                          |
 |  | transportation                                                                              |
                                                    |
+We compare the percent of missing entries for each our feature, and we decide to drop: 
+- 'num_checkups' (this has more missing data than 'doctor_visit')
+- 'birth_year' (this has more missing data than 'age')
+- 'saw_nonmental_specialist' ('difficulty_with_specialist' is more related to healthcare access)
+
+We should **keep** the following features in their respective cluster:
+- 'currently_insured' (most directly related to healthcare access and is connected to all other features in cluster)
 
 
 ## Data wrangling
