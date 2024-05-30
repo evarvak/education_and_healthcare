@@ -109,22 +109,28 @@ def cond_nan_NSCH(df, features, replace_with = 0):
 
 
 
-def impute_NSCH(df, response = 'K7Q02R_R', 
+def impute_NSCH(df, 
+                has_response = True,
+                response = 'days_missed', 
                 imputer = 'mode', 
                 test = False,
                 test_data  = [],
+                test_has_response = True,
                 state = 'both'):
     '''
-    This function imputes nan entries.
+    This function imputes nan entries.  By default, it assumes the 
 
     Arguments:
     df --data frame of categorical features
+    has_response -- bool -- True if df contains the response variable
+    response -- str -- the response variable will be removed when imputing the data and then reinserted back at the end
     imputer -- str -- select imputation method
         options: mode (replace by mode)
                  rf (use RandomForestClassifier)
     test -- bool -- if True, this will impute test_data
     test_data -- data frame with the same columns as df, to be imputed.  Note the imputer which imputes test_data will be fit with
                  df (think of df as a training set)
+    test_has_response -- bool -- True if test_data contains the response variable
     state -- see the FIPS_to_State function
 
     Returns:
@@ -157,6 +163,15 @@ def impute_NSCH(df, response = 'K7Q02R_R',
         df = df.drop([col for col in non_num_cols if col in df.columns], axis = 1)        
         if test: test_data = test_data.drop([col for col in non_num_cols if col in test_data.columns], axis = 1)
 
+        # This saves then drops the response column since it should not appear in the imputation process.
+        if has_response: 
+            response_col = df[response]
+            df = df.drop(response, axis = 1)
+
+        if test_has_response and test: 
+            test_response_col = test_data[response]
+            test_data = test_data.drop(response, axis = 1)
+
         for col in nan_cols:
             # This is df consisting of all rows where col is null.  This will be used after we fit the
             # imputer when creating the predictor.
@@ -171,6 +186,7 @@ def impute_NSCH(df, response = 'K7Q02R_R',
             rf = RandomForestClassifier(n_estimators = 100, random_state=415)
             rf.fit(df_train_X, df_train_y)
 
+            # This fills in the nan entries of col via the fitted imputer.
             if test:
                 X_test_pred = test_null.drop(col, axis = 1)
                 y_test_pred = rf.predict(X_test_pred)
@@ -180,14 +196,18 @@ def impute_NSCH(df, response = 'K7Q02R_R',
                 y_pred = rf.predict(X_pred)
                 df.loc[df[col].isnull(), col] = y_pred
 
+        # Now that all nan entries are imputed, we add back the state columns, remove FIPSST, and add back
+        # the response column, if applicable.
         if test:
             # Inserting the state columns and dropping the FIPSST column
             test_data = FIPS_to_State(test_data, state = state)
             test_data = test_data.drop(labels = 'FIPSST', axis = 1)
+            if test_has_response: test_data[response] = test_response_col.reset_index()[response]
             return test_data 
         else:
             df = FIPS_to_State(df, state = state)
             df = df.drop(labels = 'FIPSST', axis = 1)
+            if has_response: df[response] = response_col.reset_index()[response]
             return df
 
         
