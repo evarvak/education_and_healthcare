@@ -86,7 +86,9 @@ def plot_precision_recall_curve(precision, recall, thresholds):
 
 
 def split_impute(X, y, test_size=0.2,
-                imputer = 'rf'):
+                imputer = 'rf',
+                has_response = False,
+                test_has_response = False):
     '''
     Return the train test split with data imputed using method imputer
     Arguments:
@@ -101,8 +103,8 @@ def split_impute(X, y, test_size=0.2,
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42, test_size=test_size)
 
     if imputer is not None:
-        X_train_imputed = nh.impute_NSCH(X_train, imputer = imputer, state='abbr')
-        X_test_imputed = nh.impute_NSCH(X_train, imputer = imputer,test=True, test_data=X_test, state='abbr')
+        X_train_imputed = nh.impute_NSCH(X_train, imputer = imputer, state='abbr', has_response=has_response ,test_has_response = test_has_response)
+        X_test_imputed = nh.impute_NSCH(X_train, imputer = imputer,test=True, test_data=X_test, state='abbr', has_response=has_response ,test_has_response = test_has_response)
         return (X_train_imputed, X_test_imputed, y_train, y_test)
     else:
         return (X_train, X_test, y_train, y_test)
