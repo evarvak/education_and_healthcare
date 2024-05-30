@@ -44,8 +44,11 @@ Of course this list is not exhaustive and is subject to change as the project de
 ## Correlation testing between features 
 The goal of this section is to automatically identify which features in our data set are highly correlated with each other, and systematically remove them. We start by using the clean version of our data set, and we drop some features that don't make sense to investigate correlation with, like the state and their FIPS code, as well as our target variable "days missed". We start by identifying the correlation between our 84 features. We then create a series with values equal to the correlation of the multiindex of a pair of features, and we look at pair of features whose correlation is higher than a certain threshold, that we determined to be 0.8. By defining the edges to be the indices of the different correlated features, and the weight to be the correlation between two pairs, we are able to create a graph from our edges and weights. We present some of the graphs we have found between the pairs of the 84 features with high correlation below.  
 
-
-
+![](figures/correlation1.png)<!-- -->
+![](figures/correlation2.png)<!-- -->
+![](figures/correlation3.png)<!-- -->
+![](figures/correlation4.png)<!-- -->
+![](figures/correlation5.png)<!-- -->
 
 ## Data wrangling
 In this section, we will 
