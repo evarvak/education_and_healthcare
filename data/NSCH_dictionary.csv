@@ -70,7 +70,8 @@ TOTCSHCN,num_special_health_care,Count of children with special health care need
 K7Q85_R,stays_calm,How often does this child stay calm when faced with a challenge?,,1,,DEMOGRAPHIC
 K8Q31,hard_to_care_for,"During the past month, how often have you felt that this child is much harder to care for than most children his or her age?",1 = Never 2 = Rarely 3 = Sometimes 4 = Usually 5 = Always,1,,HEALTH
 BULLIED_R,bullied,"DURING THE PAST 12 MONTHS, how often was this child bullied, picked on, or excluded by other children?",1 = Never (in the past 12 months) 2 = 1-2 times (in the past 12 months) 3 = 1-2 times per month 4 = 1-2 times per week 5 = Almost every day,1,,DEMOGRAPHIC
-MAKEFRIEND,friends,"Compared to other children his or her age, how much difficulty does this child have making or keeping friends?","3 = A lot of difficulty 2 = A little difficulty 1 = No difficulty Skip if SC_AGE_YEARS<3",1,,DEMOGRAPHIC
+MAKEFRIEND,friends,"Compared to other children his or her age, how much difficulty does this child have making or keeping friends?","3 = A lot of difficulty 2 = A little difficulty 1 = No difficulty Skip if SC_AGE_YEARS<3
+",1,,DEMOGRAPHIC
 K2Q33A,anxiety,Anxiety?,1 = Yes 2 = No,1,,HEALTH
 CUTHOURS,cut_hours,": DURING THE PAST 12 MONTHS, have you or other family members: Cut down on the hours you work because of this child's health or health conditions",1 = Yes 2 = No,1,,HEALTH
 BREATHING,breathing_problems,Breathing or other respiratory problems,1 = Yes 2 = No,1,,HEALTH
@@ -85,3 +86,4 @@ SC_CSHCN,special_healthcare_selected,Special Health Care Needs Status of Selecte
 SC_K2Q13,needs_more_help,"Does this child need or use more medical care, mental health, or educational services than is usual for most children of the same age?",1 = Yes 2 = No,1,,HEALTH
 TOTNONSHCN,num_without_special_healthcare,Count of children without special health care needs,0-4,1,,HEALTH
 STOMACH,stomach_problems,"Digesting food, including stomach/intestinal problems, constipation, or diarrhea",1 = Yes 2 = No,1,,HEALTH
+FPL_I1,federal_poverty_level,Household income as a percentage of the federal poverty level,"Continuous variable on [0 to\infty)",1,0,DEMOGRAPHIC
