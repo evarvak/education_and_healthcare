@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 def make_hists(col, df, renamed=False):
     '''
-    Make two (normalized) histrograms from (1) the data in column col with df['K7Q02R_R'] = 1, 2, or 3, and 
+    Make two (normalized) histograms from (1) the data in column col with df['K7Q02R_R'] = 1, 2, or 3, and 
     (2) the data in column col with df['K7Q02R_R'] = 4 or 5.
 
 
