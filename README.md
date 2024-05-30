@@ -64,7 +64,7 @@ In addition to clusters of two, the graph above shows two large clusters in our 
 | currently_covered  | insurance_cost_issue                                                                              |
 | how_insured  | not_eligible                                                          |
 |  | transportation                                                                              |
-                                                   |
+                                                   
 We compare the percent of missing entries for each our feature, and we decide to drop: 
 - 'num_checkups' (this has more missing data than 'doctor_visit')
 - 'birth_year' (this has more missing data than 'age')
