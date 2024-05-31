@@ -41,7 +41,7 @@ Of course this list is not exhaustive and is subject to change as the project de
 
 ## Writing first, will put them in different sections later! 
 
-## Correlation testing between features 
+## Correlation testing between predicting variables
 
 It is important to understand the correlation between different variables and features in our model  for several reasons:
 - Feature selection: by analyzing correlations, we can identify redundant features, and select a minimal set of important features that best represent our target varaibles. This prevents overfitting and improves our model's ability to generalize.
