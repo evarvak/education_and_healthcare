@@ -75,6 +75,14 @@ We should **keep** the following features in their respective cluster:
 - 'currently_insured' (most directly related to healthcare access and is connected to all other features in cluster)
 
 ## Feature selection 
+Feature selection is a [crucial](https://hex.tech/use-cases/feature-selection/#:~:text=Feature%20selection%20simplifies%20models%20by,to%20stakeholders%20or%20regulatory%20bodies.) step for our model as it reduces overfitting, improves accuracy, reduces computational costs, and aids interpretability. There are [two main types](https://machinelearningmastery.com/feature-selection-with-real-and-categorical-data/) of feature selection techniques:
+- supervised: these techniques use the target variable, such as methods that remove irrelvant features. These methods can be divided into:
+     - wrapper methods: these methods create several models with different subsets of input features and select those features with the best performing model according to performance metric,
+     - filter methods: these methods use statistical techniques to evaluate the relationship between each input variable and the target variable,
+     - intrinsic methods: there are some machine learning algorithms that perform feature selection automatically as part of the learning model such as penalized regression models like decision trees, random forest, Lasso, etc.
+- unsupervised: these techniques ignore the target variable, such as methods to remove redundant variables using correlation
+
+![](figures/featureselection.png)<!-- -->
 
 ## Data wrangling
 In this section, we will 
