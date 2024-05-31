@@ -18,18 +18,19 @@ The primary hypothesis of the project is that the academic performance features 
 
 Despite the great effort made in healthcare access since the passage of the Affordable Care Act, access to quality health care is still affected by socioeconomic status. “Children from economically disadvantaged communities often lag behind their peers in more affluent communities in access to quality health care.”3  This is one of the reasons why we predict that several confounding factors will interact with each other to create a complex system that influences the relation between our variables. 
 
+### Stakeholders
 The primary stakeholders of this investigation are listed below. This group forms an expansive set and one can easily add to the list we have provided.   
 
-Stakeholders:
-State representatives 
-National representatives 
-Department of health 
-Department of education 
-Parents and children 
-Educators 
-Medical community 
-Policy makers
+- State representatives 
+- National representatives 
+- Department of health 
+- Department of education 
+- Parents and children 
+- Educators 
+- Medical community 
+- Policy makers
 
+### KPIs 
 The impact of “healthcare access on children’s academic performance” is clearly a complicated subject and may not possess a definitive conclusion.  There are many facets to education and the nut certainly has not been cracked by any specific institution to the best of our knowledge.  That being said, there are coarse markers that can at least provide some sense as to whether a model is functioning reasonably well.  For this investigation, we will look at the following key performance indicators (KPI).  
 
 Key Performance Indicators (KPI):
