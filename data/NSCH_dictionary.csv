@@ -17,8 +17,8 @@ CURRINS,currently_insured,"Child is currently insured (not including Indian heal
 FIPSST,FIPSST,State code,,1,0,DEMOGRAPHIC
 FOODSIT,can_afford_food,Household's ability to afford food,"1 = We could always afford to eat good nutritious meals, 2 = We could always afford enough to eat but not always the kinds of food we should eat, 3 = Sometimes we could not afford enough to eat, 4 = Often we could not afford enough to eat.",1,0,DEMOGRAPHIC
 HCABILITY,health_affects_things,How often health problems affected child's ability to do things,"1 = This child does not have any health conditions, 2 = Never, 3 = Sometimes, 4 = Usually, 5 = Always",1,0,HEALTH
-HOSPITALER,hostpital_er,How many times child visited ER in past 12 months,"1 = None, 2 = 1 time, 3 = 2 or more times",1,0,HEALTH
-HOSPITALSTAY,hostpital_stay,Child was admitted to stay the night in the hospital within past 12 months,"1 = Yes, 2 = No",1,0,HEALTH
+HOSPITALER,hospital_er,How many times child visited ER in past 12 months,"1 = None, 2 = 1 time, 3 = 2 or more times",1,0,HEALTH
+HOSPITALSTAY,hospital_stay,Child was admitted to stay the night in the hospital within past 12 months,"1 = Yes, 2 = No",1,0,HEALTH
 HOWMUCH,cost,How much money was payed for child's health care in past 12 months,"1 = $0 (No medical or health-related expenses), 2 = $1-$249, 3 = $250-$499, 4 = $500-$999, 5 = $1,000-$5,000, 6 = More than $5,000",1,0,HEALTH
 INSGAP,how_insured,How many of the past 12 months the child was insured,"1 = Insured all 12 months, 2 = Insured during the past 12 months but with gaps in coverage, 3 = No coverage past 12 months",1,0,ACCESS
 INSTYPE,insurance_type,Insurance type,"1 = Public only (government assistance), 2 = Private only (privately purchased, including through ACA marketplace, through employer, or TRICARE), 3 = Private and public, 5 = Not insured",1,0,ACCESS
