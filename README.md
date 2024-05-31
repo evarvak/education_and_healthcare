@@ -73,6 +73,7 @@ We compare the percent of missing entries for each our feature, and we decide to
 We should **keep** the following features in their respective cluster:
 - 'currently_insured' (most directly related to healthcare access and is connected to all other features in cluster)
 
+## Feature selection 
 
 ## Data wrangling
 In this section, we will 
