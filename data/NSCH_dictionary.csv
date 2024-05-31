@@ -5,7 +5,7 @@ A2_MENTHEALTH,a2_mental_health,Adult 2 mental health,"1 = Excellent, 2 = Very Go
 A2_PHYSHEALTH,a2_physical_health,Adult 2 physical health,"1 = Excellent, 2 = Very Good, 3 = Good, 4 = Fair, 5 = Poor",1,0,HEALTH
 ACE1,financial_problems,Difficulty financially covering basics since child was born,"1 = Never, 2 = Rarely, 3 = Somewhat often, 4 = Very often",1,0,DEMOGRAPHIC
 ALTHEALTH,alternative_healthcare,Used alternative health care in last 12 months,"1 = Yes, 2 = No",1,0,ACCESS
-APPOINTMENT,appointment_problems,Did not recieve health care due to problems making an appointment,"1 = Yes, 2 = No",1,1,ACCESS
+APPOINTMENT,appointment_problems,Did not receive health care due to problems making an appointment,"1 = Yes, 2 = No",1,1,ACCESS
 ARRANGEHC,time_spent_aranging,Weekly time spent aranging health care for child,"6 = This child does not need health care coordinated on a weekly basis, 2 = Less than 1 hour per week, 3 = 1-4 hours per week, 4 = 5-10 hours per week, 5 = 11 or more hours per week",1,0,HEALTH
 ATHOMEHC,time_spent_providing,Weekly time spent providing home health care,6 = This child does not need health care provided at home on a weekly basis 2 = Less than 1 hour per week 3 = 1-4 hours per week 4 = 5-10 hours per week 5 = 11 or more hours per week,1,0,HEALTH
 AVAILABLE,healthcare_availability,Health care was not available in the area,"1 = Yes, 2 = No",1,1,ACCESS
@@ -22,10 +22,10 @@ HOSPITALSTAY,hospital_stay,Child was admitted to stay the night in the hospital 
 HOWMUCH,cost,How much money was payed for child's health care in past 12 months,"1 = $0 (No medical or health-related expenses), 2 = $1-$249, 3 = $250-$499, 4 = $500-$999, 5 = $1,000-$5,000, 6 = More than $5,000",1,0,HEALTH
 INSGAP,how_insured,How many of the past 12 months the child was insured,"1 = Insured all 12 months, 2 = Insured during the past 12 months but with gaps in coverage, 3 = No coverage past 12 months",1,0,ACCESS
 INSTYPE,insurance_type,Insurance type,"1 = Public only (government assistance), 2 = Private only (privately purchased, including through ACA marketplace, through employer, or TRICARE), 3 = Private and public, 5 = Not insured",1,0,ACCESS
-ISSUECOST,insurance_cost_issue,Child did not recieve needed health services due to cost,"1 = Yes, 2 = No",1,1,ACCESS
+ISSUECOST,insurance_cost_issue,Child did not receive needed health services due to cost,"1 = Yes, 2 = No",1,1,ACCESS
 K11Q03R,indian_health_services,Child is currently covered by Indian health services,"1 = Yes, 2 = No",1,0,ACCESS
-K11Q60,recieved_welfare,Someone in family recieved welfare in past 12 months,"1 = Yes, 2 = No",1,0,DEMOGRAPHIC
-K11Q61,recieved_food_stamps,Someone in family recieved food stamps in past 12 months,"1 = Yes, 2 = No",1,0,DEMOGRAPHIC
+K11Q60,received_welfare,Someone in family received welfare in past 12 months,"1 = Yes, 2 = No",1,0,DEMOGRAPHIC
+K11Q61,received_food_stamps,Someone in family received food stamps in past 12 months,"1 = Yes, 2 = No",1,0,DEMOGRAPHIC
 K2Q01,general_health,General health of child,"1 = Excellent, 2 = Very Good, 3 = Good, 4 = Fair, 5 = Poor",1,0,HEALTH
 K3Q04_R,how_covered,How many of the past 12 months the child had any kind of health coverage,"1 = Covered all 12 months, 2 = Covered with gaps, 3 = Not covered",1,0,ACCESS
 K3Q20,meets_needs,How often health insurance covers child's needs (skipped if not covered),1 = Always 2 = Usually 3 = Sometimes 4 = Never,1,0,ACCESS
@@ -36,10 +36,10 @@ K4Q01,has_sick_place,There is a place where the child usually goes first when si
 K4Q02_R,sick_place,Place where child usually goes when sick (skipped if no such place),"1 = Doctor's Office, 2 = Hospital Emergency Room, 3 = Hospital Outpatient Department, 4 = Clinic or Health Center, 5 = Retail Store Clinic or ""Minute Clinic"", 6 = School (Nurse's Office, Athletic Trainer's Office), 7 = Some other place",1,0,HEALTH
 K4Q04_R,has_personal_doctor,Child has personal doctor or nurse,"1 = Yes, one person, 2 = Yes, more than one person, 3 = No",1,0,ACCESS
 K4Q20R,num_checkups,Number of preventive visits (when not sick),"1 = 0 visits, 2 = 1 visit, 3 = 2 or more visits",1,0,HEALTH
-K4Q22_R,saw_mental_specialist,Child recieved treatment from mental health specialist,"1 = Yes, 2 = No but this child needed to see a mental health professional 3 = No this child did not need to see a mental health professional",1,0,HEALTH
+K4Q22_R,saw_mental_specialist,Child received treatment from mental health specialist,"1 = Yes, 2 = No but this child needed to see a mental health professional 3 = No this child did not need to see a mental health professional",1,0,HEALTH
 K4Q24_R,saw_nonmental_specialist,Child saw non-mental health specialist,"1 = Yes, 2 = No but this child needed to see a specialist 3 = No this child did not need to see a specialist",1,0,HEALTH
 K4Q26,difficulty_with_specialist,Difficulty getting the specialist care needed (skipped if did not see specialist),"1 = Not difficult, 2 = Somewhat difficult, 3 = Very difficult, 4 = It was not possible to obtain care",1,1,ACCESS
-K4Q27,not_recieved_healthcare,"Child needed health care, but did not recieve it some time in past 12 months","1 = Yes, 2 = No",1,0,ACCESS
+K4Q27,not_received_healthcare,"Child needed health care, but did not receive it some time in past 12 months","1 = Yes, 2 = No",1,0,ACCESS
 K5Q31_R,communicated,Child's health care communicated with school (skipped if no doctor's visit),1 = Yes; 2 = No; 3 = Did not need health care provider to communicate with these providers,1,1,EDUCATION
 K7Q02R_R,days_missed,Days child missed school in past 12 months due to illness or injury,"1 = No missed school days, 2 = 1 - 3 days, 3 = 4 - 6 days, 4 = 7 - 10 days, 5 = 11 or more days, 6 = This child was not enrolled in school",1,0,EDUCATION
 K7Q82_R,cares_about_school,Child cares about doing well at school,"1 = Always, 2 = Usually, 3 = Sometimes, 4 = Never",1,1,EDUCATION
@@ -52,9 +52,9 @@ SC_K2Q10,has_perscription,Child currently uses medicine perscribed by a doctor,"
 SC_NHPI,is_hawaiian,Child is native Hawaiian or other Pacific Islanders,"`1 = Yes, 2 = No",1,0,DEMOGRAPHIC
 SC_RACE_R,race,Race of child,"1 = White alone, 2 = Black or African American alone, 3 = American Indian or Alaska Native alone, 4 = Asian alone, 5 = Native Hawaiian and Other Pacific Islander alone, 7 = Two or More Races",1,0,DEMOGRAPHIC
 SC_SEX,sex,Sex of child,"1 = Male, 2 = Female",1,0,DEMOGRAPHIC
-NOTELIG,not_eligible,Health care not recieved due to ineligibility,"1 = Yes, 2 = No",1,,DEMOGRAPHIC
-NOTOPEN,not_open,Health care not recieved due to the doctor's office not being open,"1 = Yes, 2 = No",1,,DEMOGRAPHIC
-TRANSPORTCC,transportation,Health care not recieved due to not having transportation,"1 = Yes, 2 = No",1,,DEMOGRAPHIC
+NOTELIG,not_eligible,Health care not received due to ineligibility,"1 = Yes, 2 = No",1,,DEMOGRAPHIC
+NOTOPEN,not_open,Health care not received due to the doctor's office not being open,"1 = Yes, 2 = No",1,,DEMOGRAPHIC
+TRANSPORTCC,transportation,Health care not received due to not having transportation,"1 = Yes, 2 = No",1,,DEMOGRAPHIC
 S4Q01,doctor_visit,Child visited doctor during past 12 months,"1 = Yes, 2 = No",1,,HEALTH
 K12Q12,gov_health_plan,Child is currently covered by government health plan,"1 = Yes, 2 = No",1,,ACCESS
 K5Q32,doctor_school_comm_satisfaction,,"1 = Very Satisfied, 2 = Somewhat satisfied, 3 = Somewhat dissatisfied, 4 = Very dissatisfied",1,,EDUCATION
