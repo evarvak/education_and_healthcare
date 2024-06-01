@@ -111,7 +111,6 @@ In this section, we will
 ### Helpers functions
 In this section, we describe our data gathering and tidying process. The original dataframe had 29433 rows and 448 columns. In order to narrow down to only relevant features, we coded up several functions to help clean up the dataframe ahead of further exploration. We will be making extensive use of the _helper.py family of function packages. 
 
-### Data selection
 The first series of functions are written and stored in NSCH_helpers.py, which are later called on in model_selection_helpers.py and model_selection.py.
 1. clean_columns: This function takes in the original dataframe and essentially removes any columns that are sparse as well as any columns that are expected to be irrelevant based on the context of the motivating question.
 2. FIPS_to_State: This function takes in a data frame with the 'FIPSST' column of binary state codes and then changes the FIP code to an integer from a byte string and also creates a column with the full state name.
