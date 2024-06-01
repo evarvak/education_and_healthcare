@@ -131,7 +131,7 @@ We focus on the model with 10 features.  We can visualize the importance of each
 ![](figures/feature_importance_10.png)<!-- -->
 
 We can similarly visualize odds ratios. Odds ratios tell us the relative increase in the odds that a student will have high absenteeism due to a unit increase in the given feature. 
-![](figures/odds_raios_10.png)<!-- -->
+![](figures/odds_ratios_10.png)<!-- -->
 
 Overall, we found that poor health was strongly related to absenteeism.  
 - Specifically, we found that a higher number of missed days was predicted by poorer general health and more time spent in the hospital, as well as the presence of depression, chronic physical pain, and digestive problems.
