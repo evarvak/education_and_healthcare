@@ -57,29 +57,36 @@ We quantified the difference between the (normalized) histograms of each feature
 
 When we initially began handpicking features, we had around 40 features. Upon including features highly correlated with the target variable and those exhibiting significant differences in histogram shapes to our selection, the total count reached 88 features.
 
-## Initial Model selection
-One of our goals was to create a simple model to classify students between "low absenteeism" and "high absenteeism". We start by splitting students into training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss more than 7 school days. For each classifier (including a stratified dummy model), we calculate accuracy, precision, recall, average precision score (i.e., area under the precisio-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
+## Initial model selection
+One of our goals was to create a simple model to classify students between "low absenteeism," which we define as missing 0-6 school days in a year, and "high absenteeism," which we define as missing 7 or more school days in a year. We start by splitting students into training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss 7 or more school days. For each classifier (including a stratified dummy model as a baseline classifier), we calculate accuracy, precision, recall, average precision score (i.e., area under the precision-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
 
 ![](figures/pr1.png)<!-- -->
+![](figures/dummy_performance.png)<!-- -->
 ![](figures/pr3.png)<!-- -->
+![](figures/lr_performance.png)<!-- -->
 ![](figures/pr4.png)<!-- -->
+![](figures/rf_performance.png)<!-- -->
+![](figures/svc_prec_rec.png)<!-- -->
+![](figures/svc_performance.png)<!-- -->
+![](figures/knn_prec_rec.png)<!-- -->
+![](figures/knn_performance.png)<!-- -->
 
 From the above, it seems logistic regression and random forest perform similarly and both outperform the dummy classifier. We use logistic regression since it's the more interpretable model of the two.
 
 ## Feature selection 2.0
 
-### Correlation testing between predicting variables
+### Correlation testing between features
 
 It is important to understand the correlation between different variables and features in our model  for [several reasons:](https://medium.com/@abdallahashraf90x/all-you-need-to-know-about-correlation-for-machine-learning-e249fec292e9#:~:text=By%20analyzing%20correlations%2C%20researchers%20can,a%20model's%20ability%20to%20generalize.)
 - Feature selection: by analyzing correlations, we can identify redundant features, and select a minimal set of important features that best represent our target varaibles. This prevents overfitting and improves our model's ability to generalize.
 - Reducing bias: by identifying correlation between input features and sensitive attributes, we can evaluate our model for potential biases, monitor feature importance, and apply techniques like fair representation learning to mitigate bias.
 - Detecting multicollinearity: highly linearly correlated features can negatively impact our models by increasing invariance and making it difficult to determine the significance and effect of individual predictors. 
 
-The goal of this feature selection method is to automatically identify which features in our data set are highly correlated with each other, and systematically remove them. We start by using the clean version of our data set (that contains 84 features), and we drop some features that don't make sense to investigate correlation with, like the state and their FIPS code, as well as our target variable "days missed". We then create a series with values equal to the correlation of the multiindex of a pair of features, and we look at pair of features whose correlation is higher than a certain threshold, that we determined to be 0.8. By defining the edges to be the indices of the different correlated features, and the weight to be the correlation between two pairs, we are able to create a graph from our edges and weights. In addition to clusters of two, the graph above shows two large clusters in our features.
+The goal of this feature selection method is to automatically identify which features in our data set are highly correlated with each other, and systematically remove them. We start by using the clean version of our data set (that contains 84 features), and we drop some features that don't make sense to investigate correlation with, like the state and their FIPS code, as well as our target variable "days missed". We then create a series with values equal to the correlation of the multiindex of a pair of features, and we look at pair of features whose correlation is higher than a certain threshold, that we set to be 0.8. By defining the edges to be the indices of the different correlated features, and the weight to be the correlation between two pairs, we are able to create a graph from our edges and weights. In addition to clusters of two, the graph above shows two large clusters in our features.
 
 ![](figures/corr_clusters_with_labels.png)<!-- -->
                                                    
-We eliminate all but one feature from each highly co-linear “cluster” found. We compare the percent of missing entries for each our feature, and we decide to drop: 
+We eliminate all but one feature from each highly collinear “cluster” found. We compare the percent of missing entries for each our feature, and we decide to drop: 
 - 'num_checkups' (this has more missing data than 'doctor_visit')
 - 'birth_year' (this has more missing data than 'age')
 - 'saw_nonmental_specialist' ('difficulty_with_specialist' is more related to healthcare access)
@@ -88,10 +95,10 @@ We should **keep** the following features in their respective cluster:
 - 'currently_insured' (most directly related to healthcare access and is connected to all other features in cluster)
 
 ### Recursive feature elimination (RFE)
-Now that we identify the inital model we would like to work with and dropped highly correlated features, we fit a logistic regression model to our data, and we visualize feature importance by plotting the fitted model coefficients. 
+Next, we fit a logistic regression model to our refined dataset and visualize feature importance by plotting the fitted model coefficients. 
 ![](figures/feature_importance_all.png)<!-- -->
 
-Many of these features do not seem to influence the model much. Next, we'll iteratively remove the feature with the smallest coefficient (in magnitude) until model performance starts to suffer. We'll do this using sklearn's recursive feature elimination (RFE) function. 
+Many of these features do not seem to influence the model much. Next, we iteratively remove the feature with the smallest coefficient (in magnitude) until model performance starts to suffer. We do this using sklearn's recursive feature elimination (RFE) function while tracking the average precision score after each feature is dropped. 
 ![](figures/rf2.PNG)<!-- -->
 
 For the sake of comparison with the results below, we compute the average precision score of the model with all features. 
