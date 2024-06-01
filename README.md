@@ -59,8 +59,8 @@ When we initially began handpicking features, we had around 40 features. Upon in
 One of our goals was to create a simple model to classify students between "low absenteeism" and "high absenteeism". We start by splitting students intro training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss more than 7 school days. For each classifier (inclduing a stratified dummy model), we calculate accuracy, precision, recall, average precision score (i.e., area under the precisio-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
 
 ![](figures/pr1.png)<!-- -->
-![](figures/pr2.png)<!-- -->
 ![](figures/pr3.png)<!-- -->
+![](figures/pr4.png)<!-- -->
 
 From the above, it seems logistic regression and random forest perform similarly and both outperform the dummy classifier. We use logistic regression since it's the more interpretable model of the two.
 
