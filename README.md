@@ -138,7 +138,7 @@ Overall, we found that poor health was strongly related to absenteeism.
 ## Acknowledgment 
 Thank you to Roman Holowinsky, Alec Clott, Steven Gubkin, Amalya Lehmann, our mentor: Evelyn Huszar, and all the Erdős Institute  
 
-## Description of Repository
+## Appendix: Description of Repository
 Here is a breakdown of our repository:
 - [data](https://github.com/evarvak/education_and_healthcare/tree/master/data): This folder includes our large dataset from NSCH, a file converting FIPS codes to state names, and a dictionary of our most important features.
 - [code](https://github.com/evarvak/education_and_healthcare/tree/master/code): This folder contains several helper functions used in our main notebooks.
