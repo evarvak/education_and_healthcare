@@ -34,11 +34,9 @@ Through these methods, we refined our dataset to 88 features.
 
 ## Model selection
 
-We trained 5 models to predict whether children are at risk for high absenteeism using the 88 features we identified in the previous section: a logistic regression model, a random forest classifier, a support vector classiifer, a k-nearest neighbor classifier, and a stratified dummy classifier to use as a baseline model. Of these, logistic regression and random forest perform similarly and both outperform the other three classifiers. We chose to use a logistic regression model since it's the more interpretable model of the two.
+We trained 5 models to predict whether children are at risk for high absenteeism using the 88 features we identified in the previous section: a logistic regression model, a random forest classifier, a support vector classifier, a k-nearest neighbor classifier, and a stratified dummy classifier to use as a baseline model. Of these, logistic regression and random forest perform similarly and both outperform the other three classifiers. We chose to use a logistic regression model since it's the more interpretable model of the two.
 
 ## Feature selection 2.0
-
-### Correlation testing between features
 
 We refined our list of features by identifying groups of collinear variables and removing all but one feature from each group. Through this method, we reduced our feature count by 14, giving us 74 remaining features.
 We then used [recursive feature elimination](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFE.html) to systematically remove features until the model performance began to suffer. This final method of feature selection produced a list of ten total features
