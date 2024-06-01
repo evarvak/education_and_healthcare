@@ -48,12 +48,10 @@ We are interested in exploring the effect of healthcare access on children's aca
 - Target variable:
      - "days missed in school". We convert days_missed into a categorical variable: 0 means 0-6 days missed, 1 means 7+ days missed.
 
-## Data wrangling
-Our dataset is a high-dimensional dataset with 29433 rows and 448 columns (448 features). Feature selection is a [crucial](https://hex.tech/use-cases/feature-selection/#:~:text=Feature%20selection%20simplifies%20models%20by,to%20stakeholders%20or%20regulatory%20bodies.) step for our model as it reduces overfitting, improves accuracy, reduces computational costs, and aids interpretability. 
 
-### Feature selection 1.0
+## Feature selection 1.0
 
-We use **three** different methods for feature selection: 
+Our dataset is a high-dimensional dataset with 29433 rows and 448 columns (448 features). Feature selection is a [crucial](https://hex.tech/use-cases/feature-selection/#:~:text=Feature%20selection%20simplifies%20models%20by,to%20stakeholders%20or%20regulatory%20bodies.) step for our model as it reduces overfitting, improves accuracy, reduces computational costs, and aids interpretability. We use **three** different methods for feature selection: 
 - **Handpick**: we parse through the 447 features in the NSCH dataset, picking any related to health and healthcare access,
 - **Correlation analysis with the target variable** (supervised filter method): we compute the linear correlation between each feature and the number of days missed, keeping features with high correlation,
 - **Histogram analysis** (supervised filter method): for each feature, we measured the change in histogram shape among children with low and with high absenteeism, keeping features with sufficiently different histograms. 
@@ -87,7 +85,7 @@ Upon examining the histograms of these features, it becomes evident that while "
 
 When we initially began handpicking features, we had around 40 features. Upon including features highly correlated with the target variable and those exhibiting significant differences in histogram shapes to our selection, the total count reached 88 features.
 
-## Model selection
+## Inital Model selection
 One of our goals was to create a simple model to classify students between "low absenteeism" and "high absenteeism". We start by splitting students intro training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss more than 7 school days. For each classifier (inclduing a stratified dummy model), we calculate accuracy, precision, recall, average precision score (i.e., area under the precisio-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
 
 ![](figures/pr1.png)<!-- -->
@@ -96,31 +94,20 @@ One of our goals was to create a simple model to classify students between "low 
 
 From the above, it seems logistic regression and random forest perform similarly and both outperform the dummy classifier. We use logistic regression since it's the more interpretable model of the two.
 
-## Correlation testing between predicting variables
+## Feature selection 2.0
+
+### Correlation testing between predicting variables
 
 It is important to understand the correlation between different variables and features in our model  for [several reasons:](https://medium.com/@abdallahashraf90x/all-you-need-to-know-about-correlation-for-machine-learning-e249fec292e9#:~:text=By%20analyzing%20correlations%2C%20researchers%20can,a%20model's%20ability%20to%20generalize.)
 - Feature selection: by analyzing correlations, we can identify redundant features, and select a minimal set of important features that best represent our target varaibles. This prevents overfitting and improves our model's ability to generalize.
 - Reducing bias: by identifying correlation between input features and sensitive attributes, we can evaluate our model for potential biases, monitor feature importance, and apply techniques like fair representation learning to mitigate bias.
 - Detecting multicollinearity: highly linearly correlated features can negatively impact our models by increasing invariance and making it difficult to determine the significance and effect of individual predictors. 
 
-The goal of this section is to automatically identify which features in our data set are highly correlated with each other, and systematically remove them. We start by using the clean version of our data set (that contains 84 features), and we drop some features that don't make sense to investigate correlation with, like the state and their FIPS code, as well as our target variable "days missed". We then create a series with values equal to the correlation of the multiindex of a pair of features, and we look at pair of features whose correlation is higher than a certain threshold, that we determined to be 0.8. By defining the edges to be the indices of the different correlated features, and the weight to be the correlation between two pairs, we are able to create a graph from our edges and weights.
+The goal of this feature selection method is to automatically identify which features in our data set are highly correlated with each other, and systematically remove them. We start by using the clean version of our data set (that contains 84 features), and we drop some features that don't make sense to investigate correlation with, like the state and their FIPS code, as well as our target variable "days missed". We then create a series with values equal to the correlation of the multiindex of a pair of features, and we look at pair of features whose correlation is higher than a certain threshold, that we determined to be 0.8. By defining the edges to be the indices of the different correlated features, and the weight to be the correlation between two pairs, we are able to create a graph from our edges and weights. In addition to clusters of two, the graph above shows two large clusters in our features.
 
-
-![](figures/correlation1.png)<!-- -->
-
-In addition to clusters of two, the graph above shows two large clusters in our features:
-
-| Cluster 1 | Cluster 2                                                                                   |
-|------|-----------------------------------------------------------------------------------------|
-| how_covered  |not_received_healthcare |
-| indian_health services  | appointment_problems                                                  |
-|currently_insured  | healthcare_availability                                                                             |
-|insurance_type  | not_open                                                                            |
-| currently_covered  | insurance_cost_issue                                                                              |
-| how_insured  | not_eligible                                                          |
-|  | transportation                                                                              |
+![](figures/hr4.png)<!-- -->
                                                    
-We compare the percent of missing entries for each our feature, and we decide to drop: 
+We eliminate all but one feature from each highly co-linear “cluster” found. We compare the percent of missing entries for each our feature, and we decide to drop: 
 - 'num_checkups' (this has more missing data than 'doctor_visit')
 - 'birth_year' (this has more missing data than 'age')
 - 'saw_nonmental_specialist' ('difficulty_with_specialist' is more related to healthcare access)
@@ -128,18 +115,38 @@ We compare the percent of missing entries for each our feature, and we decide to
 We should **keep** the following features in their respective cluster:
 - 'currently_insured' (most directly related to healthcare access and is connected to all other features in cluster)
 
-### Exploratory data analysis
+### Recursive feature elimination (RFE)
+Now that we identify the inital model we would like to work with and dropped highly correlated features, we fit a logistic regression model to our data, and we visualize feature importance by plotting the fitted model coefficients. 
+![](figures/featureimportance.png)<!-- -->
 
-## Proposed modeling approach 
+Many of these features do not seem to influence the model much. Next, we'll iteratively remove the feature with the smallest coefficient (in magnitude) until model performance starts to suffer. We'll do this using sklearn's recursive feature elimination (RFE) function. 
+![](figures/rf2.png)<!-- -->
 
-### Initial model choice
+For the sake of comparison with the results below, we compute the average precision score of the model with all features. 
+- The average precision score on the test set with all 61 features is 0.42352262496485665.
+- The average precision score on the test set while keeping 25 features is 0.42185069455482616.
+- The average precision score on the test set while keeping 20 features is 0.41692541715139575.
+- The average precision score on the test set while keeping 15 features is 0.41426164940946525.
+- The average precision score on the test set while keeping 10 features is 0.4079551492111875.
 
-### Model selection 
+The average precision with 25 features is nearly identical to the average precision of the model will all 61 features. Performace dips from there, though there is not much difference between the model with 20 and the model with 15 features. Let's look at what features we keep in each case.
 
-### Model evaluation 
+The 25 most important features are 
+['alternative_healthcare', 'anxiety', 'avoided_changing_jobs', 'breathing_problems', 'cut_hours', 'depression', 'doctor_visit', 'does_homework', 'emotional_problem', 'financial_problems', 'general_health', 'has_sick_place', 'headaches', 'health_affects_things', 'hostpital_er', 'hostpital_stay', 'memory_condition', 'needed_decisions', 'needed_referral', 'num_without_special_healthcare', 'physical_pain', 'recieved_food_stamps', 'recieved_welfare', 'reported_school_problems', 'stomach_problems']
 
-### Model analysis
 
+The 20 most important features are 
+['alternative_healthcare', 'anxiety', 'avoided_changing_jobs', 'breathing_problems', 'cut_hours', 'depression', 'doctor_visit', 'emotional_problem', 'financial_problems', 'general_health', 'health_affects_things', 'hostpital_er', 'hostpital_stay', 'memory_condition', 'needed_decisions', 'needed_referral', 'physical_pain', 'recieved_welfare', 'reported_school_problems', 'stomach_problems']
+
+
+The 15 most important features are 
+['alternative_healthcare', 'breathing_problems', 'cut_hours', 'depression', 'doctor_visit', 'financial_problems', 'general_health', 'hostpital_er', 'hostpital_stay', 'needed_decisions', 'needed_referral', 'physical_pain', 'recieved_welfare', 'reported_school_problems', 'stomach_problems']
+
+
+The 10 most important features are 
+['cut_hours', 'depression', 'doctor_visit', 'general_health', 'hostpital_er', 'hostpital_stay', 'needed_decisions', 'physical_pain', 'reported_school_problems', 'stomach_problems']
+
+We can visualize the importance of each feature in each model by plotting the size of each coefficient in a bar graph: 
 ## Conclusion
 
 ## Possible future directions 
