@@ -60,7 +60,7 @@ When we initially began handpicking features, we had around 40 features. Upon in
 ## Initial model selection
 One of our goals was to create a simple model to classify students between "low absenteeism," which we define as missing 0-6 school days in a year, and "high absenteeism," which we define as missing 7 or more school days in a year. We start by splitting students into training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss 7 or more school days. For each classifier (including a stratified dummy model as a baseline classifier), we calculate accuracy, precision, recall, average precision score (i.e., area under the precision-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
 
-![](figures/pr1.png)<!-- -->
+![](figures/pr1.png| width=80)<!-- -->
 ![](figures/dummy_performance.png)<!-- -->
 ![](figures/pr3.png)<!-- -->
 ![](figures/lr_performance.png)<!-- -->
