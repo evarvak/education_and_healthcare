@@ -3,10 +3,15 @@
 
 ### Team
 Ayomikun Adeniran
+
 Nick Castillo 
+
 Samara Chamoun
+
 Anthony Kling
+
 Edward Varvak
+
 Glenn Young
 
 
