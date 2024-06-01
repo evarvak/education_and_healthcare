@@ -46,7 +46,7 @@ We are interested in exploring the effect of healthcare access on children's aca
      - "access to healthcare" features (e.g. children's current healthcare coverage, how often the child is allowed to see providers, etc),
      - health-related features (e.g. depression, children's general health),
 - Target variable:
-     - "days missed in school".
+     - "days missed in school". We convert days_missed into a categorical variable: 0 means 0-6 days missed, 1 means 7+ days missed.
 
 ## Data wrangling
 Our dataset is a high-dimensional dataset with 29433 rows and 448 columns (448 features). Feature selection is a [crucial](https://hex.tech/use-cases/feature-selection/#:~:text=Feature%20selection%20simplifies%20models%20by,to%20stakeholders%20or%20regulatory%20bodies.) step for our model as it reduces overfitting, improves accuracy, reduces computational costs, and aids interpretability. 
@@ -86,6 +86,15 @@ Upon examining the histograms of these features, it becomes evident that while "
 ![](figures/featureselection.png)<!-- -->
 
 When we initially began handpicking features, we had around 40 features. Upon including features highly correlated with the target variable and those exhibiting significant differences in histogram shapes to our selection, the total count reached 88 features.
+
+## Model selection
+One of our goals was to create a simple model to classify students between "low absenteeism" and "high absenteeism". We start by splitting students intro training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss more than 7 school days. For each classifier (inclduing a stratified dummy model), we calculate accuracy, precision, recall, average precision score (i.e., area under the precisio-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
+
+![](figures/pr1.png)<!-- -->
+![](figures/pr2.png)<!-- -->
+![](figures/pr3.png)<!-- -->
+
+From the above, it seems logistic regression and random forest perform similarly and both outperform the dummy classifier. We use logistic regression since it's the more interpretable model of the two.
 
 ## Correlation testing between predicting variables
 
