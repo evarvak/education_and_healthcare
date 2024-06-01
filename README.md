@@ -165,10 +165,10 @@ Thank you to Roman Holowinsky, Alec Clott, Steven Gubkin, Amalya Lehmann, our me
 
 ## Description of Repository
 Here is a breakdown of our repository:
-- [data](https://github.com/evarvak/education_and_healthcare/tree/master/data) folder contains our large dataset from NSCH, a file conversting FIPS to State name, and a dictionary of our most important features.
-- [code](https://github.com/evarvak/education_and_healthcare/tree/master/code) folder contains several **helper functions** used in our main notebooks.
-- [notebook](https://github.com/evarvak/education_and_healthcare/tree/master/notebook) folder contains our main notebooks, where we have done data cleaning, feature selection, and model selection.
-- [documents](https://github.com/evarvak/education_and_healthcare/tree/master/documents) folder contains our deliverables (executive summary, etc)
+- [data](https://github.com/evarvak/education_and_healthcare/tree/master/data): This folder includes our large dataset from NSCH, a file converting FIPS codes to state names, and a dictionary of our most important features.
+- [code](https://github.com/evarvak/education_and_healthcare/tree/master/code): This folder contains several helper functions used in our main notebooks.
+- [notebook](https://github.com/evarvak/education_and_healthcare/tree/master/notebook): This folder houses our main notebooks, where we perform data cleaning, feature selection, and model selection.
+- [documents](https://github.com/evarvak/education_and_healthcare/tree/master/documents):  This folder contains our deliverables, including the executive summary and other relevant documents.
  
 ### Codes
 
