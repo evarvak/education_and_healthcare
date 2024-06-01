@@ -1,6 +1,13 @@
 # Healthy Bodies, Bright Minds: "The impact of Healthcare Access on Children's Academic Performance"
-Team: 
-June 1, 2024 
+#### Team
+Ayomikun Adeniran
+Nick Castillo 
+Samara Chamoun
+Anthony Kling
+Edward Varvak
+Glenn Young
+
+May - Summer 2024 
 
 Erdos Institute Data Science Boot Camp project  
  
@@ -157,13 +164,16 @@ Overall, we found that poor health was strongly related to absenteeism.
 ## Acknowledgment 
 Thank you to Roman Holowinsky, Alec Clott, Steven Gubkin, Amalya Lehmann, our mentor: Evelyn Huszar, and all the Erdős Institute  
 
-## Appendices
+## Description of Repository
+Here is a breakdown of our repository:
+- [data](https://github.com/evarvak/education_and_healthcare/tree/master/data) folder contains our large dataset from NSCH, a file conversting FIPS to State name, and a dictionary of our most important features.
+- [code](https://github.com/evarvak/education_and_healthcare/tree/master/code) folder contains several **helper functions** used in our main notebooks.
+- [notebook](https://github.com/evarvak/education_and_healthcare/tree/master/notebook) folder contains our main notebooks, where we have done data cleaning, feature selection, and model selection.
+- [documents](https://github.com/evarvak/education_and_healthcare/tree/master/documents) folder contains our deliverables (executive summary, etc)
+ 
+### Codes
 
-### Code description 
-
-
-### Helpers functions
-In order to narrow down to only relevant features, we coded up several functions to help clean up the dataframe ahead of further exploration. We will be making extensive use of the _helper.py family of function packages. 
+In order to narrow down to only relevant features, we coded up several **helper functions** to help clean up the dataframe ahead of further exploration. We will be making extensive use of the _helper.py family of function packages. 
 
 The first series of functions are written and stored in NSCH_helpers.py, which are later called on in model_selection_helpers.py and model_selection.py.
 1. clean_columns: This function takes in the original dataframe and essentially removes any columns that are sparse as well as any columns that are expected to be irrelevant based on the context of the motivating question.
@@ -186,7 +196,5 @@ The last set of functions were written in model_selection_helpers.py. They invok
 3. plot_precision_recall_curve: As expected, this function plots the precision-recall curve from classifier predictions alongside the optimal threshold as defined in the optimal_threshold function above.
 4. split_impute: Returns the train-test split with data imputed using method imputer, with the default being the random forest imputer.
 
-
-### Data repository
 
 
