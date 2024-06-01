@@ -146,7 +146,14 @@ The 15 most important features are
 The 10 most important features are 
 ['cut_hours', 'depression', 'doctor_visit', 'general_health', 'hostpital_er', 'hostpital_stay', 'needed_decisions', 'physical_pain', 'reported_school_problems', 'stomach_problems']
 
-We can visualize the importance of each feature in each model by plotting the size of each coefficient in a bar graph: 
+We can visualize the importance of each feature in each model by plotting the size of each coefficient in a bar graph. We focus on the model with 10 features.  
+![](figures/10.PNG)<!-- -->
+
+We can similarly visualize odds ratios. Odds ratios tell us the relative increase in the odds that a student will have high absenteeism due to a unit increase in the given feature. 
+![](figures/10_2.PNG)<!-- -->
+
+
+
 ## Conclusion
 
 ## Possible future directions 
