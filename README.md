@@ -56,15 +56,15 @@ Our dataset is a high-dimensional dataset with 29433 rows and 448 columns (448 f
 We use **three** different methods for feature selection: 
 - **Handpick**: we parse through the 447 features in the NSCH dataset, picking any related to health and healthcare access,
 - **Correlation analysis with the target variable** (supervised filter method): we compute the linear correlation between each feature and the number of days missed, keeping features with high correlation,
-- **Histogram analysis** (supervised filter method): for each feature, we measured the change in histogram shape among children with low and with high absenteeism, keeping features with sufficiently different histograms.
+- **Histogram analysis** (supervised filter method): for each feature, we measured the change in histogram shape among children with low and with high absenteeism, keeping features with sufficiently different histograms. 
 
 For the **correlation analysis with the target variable**, let's compare for instance the following two features:
 - "health_affects_things",
 - "how_covered".
   
-Observing the correlation results, we notice that "health_affects_things" displays a high correlation with the number of days missed, whereas "how_covered" exhibits a low correlation. This would suggest dropping "how_covered" and keeping "health_affect_things".
+Observing the correlation results, we notice that "health_affects_things" displays a high correlation with the number of days missed, whereas "how_covered" exhibits a low correlation. This would suggest dropping "how_covered" and keeping "health_affect_things". 
   
-![](figures/corr1.png)<!-- --> |  ![](figures/corr2.png)<!-- --> 
+![](figures/corr1.png)<!-- -->   ![](figures/corr2.png)<!-- --> 
 
 Turning to the **histogram analysis**, let's consider the following two features:
 - "how_insured", which indicates how many of the past 12 months the child was insured. Looking at NSCH_dictionary.csv in data, we know that:
@@ -85,6 +85,7 @@ Upon examining the histograms of these features, it becomes evident that while "
 
 ![](figures/featureselection.png)<!-- -->
 
+When we initially began handpicking features, we had around 40 features. Upon including features highly correlated with the target variable and those exhibiting significant differences in histogram shapes to our selection, the total count reached 88 features.
 
 ## Correlation testing between predicting variables
 
