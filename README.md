@@ -44,6 +44,8 @@ Upon examining the histograms of these features, it becomes evident that while "
 
 ![](figures/histo1.png)<!-- -->  ![](figures/histo2.png)<!-- --> 
 
+We quantified the difference between the (normalized) histograms of each feature stratefied by high and low absenteeism by determining their total overlap, and we kept features with sufficiently small overlaps.
+
 <!--- There are [two main types](https://machinelearningmastery.com/feature-selection-with-real-and-categorical-data/) of feature selection techniques:
 - supervised: these techniques use the target variable, such as methods that remove irrelvant features. These methods can be divided into:
      - wrapper methods: these methods create several models with different subsets of input features and select those features with the best performing model according to performance metric,
