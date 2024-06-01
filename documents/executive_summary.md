@@ -43,17 +43,9 @@ We trained 5 models to predict whether children are at risk for high absenteeism
 We refined our list of features by identifying groups of collinear variables and removing all but one feature from each group. Through this method, we reduced our feature count by 14, giving us 74 remaining features.
 We then used [recursive feature elimination](https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.RFE.html) to systematically remove features until the model performance began to suffer. This final method of feature selection produced a list of ten total features
 
-## Final model selection
+## Model analysis
 
-We focus on the model with 10 features.  We can visualize the importance of each feature in each model by plotting the size of each coefficient in a bar graph. 
-![](figures/feature_importance_10.png)<!-- -->
-
-We can similarly visualize odds ratios. Odds ratios tell us the relative increase in the odds that a student will have high absenteeism due to a unit increase in the given feature. 
-![](figures/odds_ratios_10.png)<!-- -->
-
-Overall, we found that poor health was strongly related to absenteeism.  
-- Specifically, we found that a higher number of missed days was predicted by poorer general health and more time spent in the hospital, as well as the presence of depression, chronic physical pain, and digestive problems.
-- Additionally, children who reported having problems at school, needed healthcare-related decisions made on their behalf, or experienced health problems for which their family needed to cut work hours were also found to be more likely to miss school
+By measuring feature importance as the magnitude of model coefficients, we found that poor health was strongly related to absenteeism  Specifically, we found that a higher number of missed days was predicted by poorer general health and more time spent in the hospital, as well as the presence of depression, chronic physical pain, and digestive problems. Additionally, children who reported having problems at school, needed healthcare-related decisions made on their behalf, or experienced health problems for which their family needed to cut work hours were also found to be more likely to miss school. While our goal was to determine the influence of healthcare access on educational outcomes, our remaining features after selection provide little insight into the role healthcare access plays in the same.
 
 ## Conclusion and future directions
 - It looks like many features related to health highly affect absenteeism. The preliminary results suggest that access to health care is not the strongest predictor of child absenteeism.
