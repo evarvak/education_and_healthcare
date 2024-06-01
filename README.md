@@ -77,7 +77,7 @@ It is important to understand the correlation between different variables and fe
 
 The goal of this feature selection method is to automatically identify which features in our data set are highly correlated with each other, and systematically remove them. We start by using the clean version of our data set (that contains 84 features), and we drop some features that don't make sense to investigate correlation with, like the state and their FIPS code, as well as our target variable "days missed". We then create a series with values equal to the correlation of the multiindex of a pair of features, and we look at pair of features whose correlation is higher than a certain threshold, that we determined to be 0.8. By defining the edges to be the indices of the different correlated features, and the weight to be the correlation between two pairs, we are able to create a graph from our edges and weights. In addition to clusters of two, the graph above shows two large clusters in our features.
 
-![](figures/corr_clusters_with_labels.PNG)<!-- -->
+![](figures/corr_clusters_with_labels.png)<!-- -->
                                                    
 We eliminate all but one feature from each highly co-linear “cluster” found. We compare the percent of missing entries for each our feature, and we decide to drop: 
 - 'num_checkups' (this has more missing data than 'doctor_visit')
