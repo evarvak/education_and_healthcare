@@ -51,20 +51,30 @@ We are interested in exploring the effect of healthcare access on children's aca
 ## Data wrangling
 Our dataset is a high-dimensional dataset with 29433 rows and 448 columns (448 features). Feature selection is a [crucial](https://hex.tech/use-cases/feature-selection/#:~:text=Feature%20selection%20simplifies%20models%20by,to%20stakeholders%20or%20regulatory%20bodies.) step for our model as it reduces overfitting, improves accuracy, reduces computational costs, and aids interpretability. 
 
-We use **three** different methods for feature selection: 
-- Handpick: we parsed through the 447 features in the NSCH dataset, picking any related to health and healthcare access,
-- Correlation analysis (supervised filter method): we compute the linear correlation between each feature and the number of days missed, keeping features with high correlation,
-- Histogram analysis (supervised filter method): for each feature, we measured the change in histogram shape among children with low and with high absenteeism, keeping features with sufficiently different histograms.
+### Feature selection 1.0
 
-For the histogram analysis, let's compare for example the following two features:
+We use **three** different methods for feature selection: 
+- **Handpick**: we parse through the 447 features in the NSCH dataset, picking any related to health and healthcare access,
+- **Correlation analysis with the target variable** (supervised filter method): we compute the linear correlation between each feature and the number of days missed, keeping features with high correlation,
+- **Histogram analysis** (supervised filter method): for each feature, we measured the change in histogram shape among children with low and with high absenteeism, keeping features with sufficiently different histograms.
+
+For the **correlation analysis with the target variable**, let's compare for instance the following two features:
+- "health_affects_things",
+- "how_covered".
+  
+Observing the correlation results, we notice that "health_affects_things" displays a high correlation with the number of days missed, whereas "how_covered" exhibits a low correlation. This would suggest dropping "how_covered" and keeping "health_affect_things".
+  
+![](figures/corr1.png)<!-- --> |  ![](figures/corr2.png)<!-- --> 
+
+Turning to the **histogram analysis**, let's consider the following two features:
 - "how_insured", which indicates how many of the past 12 months the child was insured. Looking at NSCH_dictionary.csv in data, we know that:
         - 1 = Insured all 12 months, 2 = Insured during the past 12 months but with gaps in coverage, 3 = No coverage past 12 months
 - "general_health", which denotes the general health of a child. We know that:
         - 1 = Excellent, 2 = Very Good, 3 = Good, 4 = Fair, 5 = Poor
 
-Looking at the histograms of the following two features below, we notice that there is not a big gap between low and high absenteeism for how_insured, however there is a significantly big change in the histogram shape among children with low and high absenteeism for general_health feature. This would suggest keeping "general_health" and dropping "how_insured". 
-![](figures/histo1.png)<!-- --> | ![](figures/histo2.png)<!-- --> 
+Upon examining the histograms of these features, it becomes evident that while "how_insured" does not show a significant disparity in histogram shape between low and high absenteeism, "general_health" does.  This would suggest keeping "general_health" and dropping "how_insured". 
 
+![](figures/histo1.png)<!-- -->  ![](figures/histo2.png)<!-- --> 
 
 <!--- There are [two main types](https://machinelearningmastery.com/feature-selection-with-real-and-categorical-data/) of feature selection techniques:
 - supervised: these techniques use the target variable, such as methods that remove irrelvant features. These methods can be divided into:
