@@ -56,8 +56,14 @@ We use **three** different methods for feature selection:
 - Correlation analysis (supervised filter method): we compute the linear correlation between each feature and the number of days missed, keeping features with high correlation,
 - Histogram analysis (supervised filter method): for each feature, we measured the change in histogram shape among children with low and with high absenteeism, keeping features with sufficiently different histograms.
 
-- 
+For the histogram analysis, let's compare for example the following two features:
+- "how_insured", which indicates how many of the past 12 months the child was insured. Looking at NSCH_dictionary.csv in data, we know that:
+        - 1 = Insured all 12 months, 2 = Insured during the past 12 months but with gaps in coverage, 3 = No coverage past 12 months
+- "general_health", which denotes the general health of a child. We know that:
+        - 1 = Excellent, 2 = Very Good, 3 = Good, 4 = Fair, 5 = Poor
 
+Looking at the histograms of the following two features below, we notice that there is not a big gap between low and high absenteeism for how_insured, however there is a significantly big change in the histogram shape among children with low and high absenteeism for general_health feature. This would suggest keeping "general_health" and dropping "how_insured". 
+![](figures/histo1.png)<!-- --> | ![](figures/histo2.png)<!-- --> 
 
 
 <!--- There are [two main types](https://machinelearningmastery.com/feature-selection-with-real-and-categorical-data/) of feature selection techniques:
