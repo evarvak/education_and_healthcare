@@ -1,5 +1,5 @@
 # Healthy Bodies, Bright Minds: "The impact of Healthcare Access on Children's Academic Performance"
-#### Team
+### Team
 Ayomikun Adeniran
 Nick Castillo 
 Samara Chamoun
@@ -7,9 +7,7 @@ Anthony Kling
 Edward Varvak
 Glenn Young
 
-May - Summer 2024 
-
-Erdos Institute Data Science Boot Camp project  
+**May - Summer 2024, Erdos Institute Data Science Boot Camp project** 
  
 ## Project Description
 This project involves the investigation and evaluation of how different factors contributing to children's access to healthcare affects their academic performance. In particular, this project investigates the connection between healthcare access and school absenteeism.
