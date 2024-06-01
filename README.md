@@ -92,7 +92,8 @@ We eliminate all but one feature from each highly collinear “cluster” found.
 - 'saw_nonmental_specialist' ('difficulty_with_specialist' is more related to healthcare access)
 
 We should **keep** the following features in their respective cluster:
-- 'currently_insured' (most directly related to healthcare access and is connected to all other features in cluster)
+- 'currently_insured' (most directly related to healthcare access and is connected to all other features in the cluster)
+- 'healthcare_availability' (most directly related to healthcare access and acts as a gateway feature to the other features in the cluster)
 
 ### Recursive feature elimination (RFE)
 Next, we fit a logistic regression model to our refined dataset and visualize feature importance by plotting the fitted model coefficients. 
