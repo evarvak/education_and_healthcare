@@ -58,19 +58,20 @@ We quantified the difference between the (normalized) histograms of each feature
 When we initially began handpicking features, we had around 40 features. Upon including features highly correlated with the target variable and those exhibiting significant differences in histogram shapes to our selection, the total count reached 88 features.
 
 ## Initial model selection
-One of our goals was to create a simple model to classify students between "low absenteeism," which we define as missing 0-6 school days in a year, and "high absenteeism," which we define as missing 7 or more school days in a year. We start by splitting students into training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss 7 or more school days. For each classifier (including a stratified dummy model as a baseline classifier), we calculate accuracy, precision, recall, average precision score (i.e., area under the precision-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
+One of our goals was to create a simple model to classify students between "low absenteeism," which we define as missing 0-6 school days in a year, and "high absenteeism," which we define as missing 7 or more school days in a year. We start by splitting students into training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss 7 or more school days. For each classifier (including a stratified dummy model as a baseline classifier), we calculate accuracy, precision, recall, average precision score (i.e., area under the precision-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. For brevity, we only show the precision-recall curves of each classifier below, while the other performance metrics can be found by running the notebook [model_selection.ipynb)(https://github.dev/evarvak/education_and_healthcare/blob/master/notebook/model_selection.ipynb).
 
-![](figures/pr1.png)<!-- -->![](figures/dummy_performance.png)<!-- -->
+![](figures/pr1.png)<!-- -->
+<!--![](figures/dummy_performance.png) -->
 ![](figures/pr3.png)<!-- -->
-![](figures/lr_performance.png)<!-- -->
+<!--![](figures/lr_performance.png) -->
 ![](figures/pr4.png)<!-- -->
-![](figures/rf_performance.png)<!-- -->
+<!--![](figures/rf_performance.png) -->
 ![](figures/svc_prec_rec.png)<!-- -->
-![](figures/svc_performance.png)<!-- -->
+<!--![](figures/svc_performance.png) -->
 ![](figures/knn_prec_rec.png)<!-- -->
-![](figures/knn_performance.png)<!-- -->
+<!--![](figures/knn_performance.png) -->
 
-From the above, it seems logistic regression and random forest perform similarly and both outperform the dummy classifier. We use logistic regression since it's the more interpretable model of the two.
+From the above, it seems logistic regression and random forest perform similarly and both outperform the other three classifiers. We use logistic regression since it's the more interpretable model of the two.
 
 ## Feature selection 2.0
 
