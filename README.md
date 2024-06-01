@@ -57,8 +57,8 @@ We quantified the difference between the (normalized) histograms of each feature
 
 When we initially began handpicking features, we had around 40 features. Upon including features highly correlated with the target variable and those exhibiting significant differences in histogram shapes to our selection, the total count reached 88 features.
 
-## Inital Model selection
-One of our goals was to create a simple model to classify students between "low absenteeism" and "high absenteeism". We start by splitting students intro training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss more than 7 school days. For each classifier (inclduing a stratified dummy model), we calculate accuracy, precision, recall, average precision score (i.e., area under the precisio-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
+## Initial Model selection
+One of our goals was to create a simple model to classify students between "low absenteeism" and "high absenteeism". We start by splitting students into training and testing tests.  We train and evaluate a logistic regression classifier, a random forest classifier, a support vector classifier, and a KNN classifier to predict whether children will miss more than 7 school days. For each classifier (including a stratified dummy model), we calculate accuracy, precision, recall, average precision score (i.e., area under the precisio-recall curve), and f1 score (harmonic mean of precision and recall) on the training and test data. 
 
 ![](figures/pr1.png)<!-- -->
 ![](figures/pr3.png)<!-- -->
