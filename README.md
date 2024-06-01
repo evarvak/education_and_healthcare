@@ -9,31 +9,6 @@ Anthony Kling
 Edward Varvak
 Glenn Young
 
- 
-## Project Description
-This project involves the investigation and evaluation of how different factors contributing to children's access to healthcare affects their academic performance. In particular, this project investigates the connection between healthcare access and school absenteeism.
-
-### Stakeholders
-The primary stakeholders of this investigation are listed below. This group forms an expansive set and one can easily add to the list we have provided.   
-
-- State representatives 
-- National representatives 
-- Department of health 
-- Department of education 
-- Parents and children 
-- Educators 
-- Medical community 
-- Policy makers
-
-### KPIs 
-The impact of “healthcare access on children’s academic performance” is clearly a complicated subject and may not possess a definitive conclusion.  There are many facets to education and the nut certainly has not been cracked by any specific institution to the best of our knowledge.  That being said, there are coarse markers that can at least provide some sense as to whether a model is functioning reasonably well.  For this investigation, we will look at the following key performance indicators (KPI).  
-
-Key Performance Indicators (KPI):
-The ability of the model to predict the likely range of a given academic performance feature (APF) for an initial set of access to healthcare features (AHF).
-If we study the binary outcome of APFs being above or below national/local averages, we can for example use the F1 score to assess the predictive performance of the model.  
-Assuming our model is capable of returning a probability distribution for each APF given an initial set of AHF we may use the Kullback–Leibler (KL) divergence to compare the predicted probability distribution to the observed distribution from our dataset.
-The usual metrics for errors: Mean Squared Error (MSE), Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).  These can be applied to prediction errors in the APFs. 
-Of course this list is not exhaustive and is subject to change as the project develops. 
 
 ## Problem and data selection
 We are interested in exploring the effect of healthcare access on children's academic performance. Research shows that school absences have negative impact on grades and student's academic achievement. For that reason, we will use absenteeism as a metric of student educational outcome. We use the dataset from the National Survey of Children's Health (NSCH) dataset, and we extract from this dataset two sets of variables:
